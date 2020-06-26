@@ -3,12 +3,6 @@
 	..()
 	religify_chapel()
 
-	//Radial menu
-	gen_bible_variants()
-	gen_altar_variants()
-	gen_pews_variants()
-	gen_carpet_variants()
-	
 /datum/religion/chaplain/proc/religify_chapel()
 	for(var/chap_area in typesof(/area/station/civilian/chapel))
 		religify(chap_area)
@@ -21,37 +15,6 @@
 			continue
 		variants[BB.name] = BB
 	return variants
-
-/datum/religion/chaplain/proc/gen_bible_variants()
-	bible_skins = list()
-	for(var/info_type in subtypesof(/datum/bible_info))
-		var/datum/bible_info/BI = info_type
-		if(!initial(BI.name))
-			continue
-		bible_skins[initial(BI.name)] = image(icon = initial(BI.icon), icon_state = initial(BI.icon_state))
-
-/datum/religion/chaplain/proc/gen_altar_variants()
-	altar_skins = list()
-	var/matrix/M = matrix()
-	M.Scale(0.7)
-	for(var/info in altar_info_by_name)
-		var/image/I = image(icon = 'icons/obj/structures/chapel.dmi', icon_state = altar_info_by_name[info])
-		I.transform = M
-		altar_skins[info] = I
-
-/datum/religion/chaplain/proc/gen_pews_variants()
-	pews_skins = list()
-	for(var/info in pews_info_by_name)
-		pews_skins[info] = image(icon = 'icons/obj/structures/chapel.dmi', icon_state = "[pews_info_by_name[info]]_left")
-
-/datum/religion/chaplain/proc/gen_carpet_variants()
-	carpet_skins = list()
-	var/matrix/M = matrix()
-	M.Scale(0.7)
-	for(var/info in carpet_dir_by_name)
-		var/image/I = image(icon = 'icons/turf/carpets.dmi', icon_state = "carpetsymbol", dir = carpet_dir_by_name[info])
-		I.transform = M
-		carpet_skins[info] = I
 
 /datum/religion/chaplain/proc/create_by_chaplain(mob/living/carbon/human/chaplain)
 	reset_religion()
@@ -92,7 +55,7 @@
 	while(!accepted)
 		if(!B)
 			break // prevents possible runtime errors
-		new_book_style = show_radial_menu(chaplain, chaplain, bible_skins, tooltips = TRUE)
+		new_book_style = input(chaplain, "Which bible style would you like?") in bible_variants
 
 		var/datum/bible_info/BB = bible_variants[new_book_style]
 		if(BB)
@@ -101,8 +64,7 @@
 
 			chaplain.update_inv_l_hand() // so that it updates the bible's item_state in his hand
 
-		var/like = show_radial_menu(chaplain, chaplain, radial_question, tooltips = TRUE)
-		switch(like)
+		switch(input(chaplain,"Look at your bible - is this what you want?") in list("Yes","No"))
 			if("Yes")
 				accepted = TRUE
 			if("No")

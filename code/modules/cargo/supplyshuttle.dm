@@ -50,7 +50,7 @@ var/list/mechtoys = list(
 			return TRUE
 		if(istype(M, /mob/living/simple_animal/hostile))
 			return FALSE
-		if(!M.lying && !istype(M, /mob/living/carbon/monkey) && !istype(M, /mob/living/carbon/slime) && !istype(M, /mob/living/simple_animal/mouse) && !istype(M, /mob/living/silicon/robot/drone))  //If your not laying down, or a small creature, no pass.
+		if(!M.lying && !istype(M, /mob/living/carbon/monkey) && !istype(M, /mob/living/carbon/slime) && !istype(M, /mob/living/simple_animal/mouse) && !istype(M, /mob/living/silicon/robot/drone) && !istype(M, /mob/living/carbon/xenomorph))  //If your not laying down, or a small creature, no pass.
 			return FALSE
 	return ..()
 

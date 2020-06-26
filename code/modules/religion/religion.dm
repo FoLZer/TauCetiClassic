@@ -53,17 +53,11 @@
 		"Atheism" = /datum/bible_info/atheist,
 	)
 
-	// Radial menu
-	var/list/bible_skins
-
 	/*
 	var/lecturn_icon_state
 	// Is required to have a "Default" as a fallback.
 	var/static/list/lecturn_info_by_name = list(
 	)
-
-	// Radial menu
-	var/lecturn_skins
 	*/
 
 	var/pews_icon_state
@@ -83,9 +77,6 @@
 		"NanoTrasen" = "nanotrasen",
 	)
 
-	// Radial menu
-	var/list/pews_skins
-
 	var/altar_icon_state
 	// Is required to have a "Default" as a fallback.
 	var/static/list/altar_info_by_name = list(
@@ -100,9 +91,6 @@
 		"Druid" = "druidaltar"
 	)
 
-	// Radial menu
-	var/list/altar_skins
-
 	// Default is "0" TO-DO: convert this to icon_states. ~Luduk
 	var/carpet_dir
 	var/static/list/carpet_dir_by_name = list(
@@ -112,9 +100,6 @@
 		"Atheism" = 10,
 		"Islam" = 4,
 	)
-
-	// Radial menu
-	var/list/carpet_skins
 
 	/*
 		Aspects and Rites related

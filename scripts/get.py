@@ -24,28 +24,27 @@ def read_arguments():
 def main(options):
 
 	if(options.json):
-		options.json = json.loads(byond_outer_text(options.json))
+		jsonn = json.loads(byond_outer_text(options.json))
 
-	try:
+	if(options.json):
+		r = requests.get(options.url, json=jsonn)
+	else:
+		r = requests.get(options.url)
 
-		if(options.json):
-			r = requests.get(options.url, json=options.json)
-		else:
-			r = requests.get(options.url)
+	if(r.raise_for_status()):
+		sys.exit(0)
 
-		r.raise_for_status()
-
-	except requests.exceptions.RequestException as e:
-		print(e, file=sys.stderr)
-		sys.exit(1)
-
-	sys.stdout.buffer.write(byond_inner_text(r.text))
+	#sys.stdout.buffer.write(byond_inner_text(r.text))
+	#print(byond_inner_text(r.text))
+	#with open(".shell","w") as out:
+	#	out.write(r.text)
+	sys.exit(1)
 
 def byond_outer_text(text):
-	return text.decode("cp1251").replace("¶", "я")
+	return text.decode("cp1251").replace("¶", "я").replace("'","\"")
 
 def byond_inner_text(text):
-	return text.replace("я", "¶").encode("cp1251", 'ignore')
+	return text.replace("я", "¶")#.encode("cp1251", 'ignore')
 
 if __name__ == "__main__":
 	options = read_arguments()
