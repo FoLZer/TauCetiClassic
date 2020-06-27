@@ -41,7 +41,7 @@ def main(options):
 	sys.exit(1)
 
 def byond_outer_text(text):
-	return text.decode("cp1251").replace("¶", "я").replace("'","\"")
+	return text.decode("utf-8").replace("¶", "я").replace("'","\"")
 
 def byond_inner_text(text):
 	return text.replace("я", "¶")#.encode("cp1251", 'ignore')
