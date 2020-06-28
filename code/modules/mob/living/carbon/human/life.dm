@@ -943,24 +943,19 @@
 	if(shoes)
 		if(shoes.protective_temperature > temp)
 			fire_prot += (shoes.protective_temperature/10)
-
 	return fire_prot
-
 /mob/living/carbon/human/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
 	if(nodamage)
 		return
 	//world <<"body_part = [body_part], exposed_temperature = [exposed_temperature], exposed_intensity = [exposed_intensity]"
 	var/discomfort = min(abs(exposed_temperature - bodytemperature)*(exposed_intensity)/2000000, 1.0)
-
 	if(exposed_temperature > bodytemperature)
 		discomfort *= 4
-
 	if(mutantrace == "plant")
 		discomfort *= TEMPERATURE_DAMAGE_COEFFICIENT * 2 //I don't like magic numbers. I'll make mutantraces a datum with vars sometime later. -- Urist
 	else
 		discomfort *= TEMPERATURE_DAMAGE_COEFFICIENT //Dangercon 2011 - now with less magic numbers!
 	//world <<"[discomfort]"
-
 	switch(body_part)
 		if(HEAD)
 			apply_damage(2.5*discomfort, BURN, BP_HEAD)
@@ -1570,17 +1565,8 @@
 		set_EyesVision("greyscale")
 		return
 	var/obj/item/clothing/glasses/G = glasses
-	if(istype(G) && G.active)
-		if(istype(glasses, /obj/item/clothing/glasses/meson))
-			sightglassesmod = "meson"
-		else if(istype(glasses, /obj/item/clothing/glasses/night) && !istype(glasses, /obj/item/clothing/glasses/night/shadowling))
-			sightglassesmod = "nvg"
-		else if(istype(glasses, /obj/item/clothing/glasses/thermal))
-			sightglassesmod = "thermal"
-		else if(istype(glasses, /obj/item/clothing/glasses/science))
-			sightglassesmod = "sci"
-		else if(istype(glasses, /obj/item/clothing/glasses/sunglasses/noir))
-			sightglassesmod = "greyscale"
+	if(istype(G) && G.sightglassesmod && (G.active || !G.toggleable))
+		sightglassesmod = G.sightglassesmod
 
 	if(species.nighteyes)
 		var/light_amount = 0
