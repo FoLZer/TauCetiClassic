@@ -61,7 +61,6 @@
 	// Is required to have a "Default" as a fallback.
 	var/static/list/lecturn_info_by_name = list(
 	)
-
 	// Radial menu
 	var/lecturn_skins
 	*/
