@@ -9,12 +9,4 @@
 
 	var/output = world.shelleo(command)
 
-	var/errorlevel = output[SHELLEO_ERRORLEVEL]
-	var/stdout = output[SHELLEO_STDOUT]
-	var/stderr = output[SHELLEO_STDERR]
-
-	if(!errorlevel)
-		return stdout
-	else
-		ERROR("Python script execution error in [script]:\n [stderr]")
-		return 0
+	return output
