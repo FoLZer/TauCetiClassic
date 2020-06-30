@@ -1564,6 +1564,9 @@
 	if(blinded)
 		set_EyesVision("greyscale")
 		return
+	if(inherent_sighttype)
+		set_EyesVision(inherent_sighttype)
+		return
 	var/obj/item/clothing/glasses/G = glasses
 	if(istype(G) && G.sightglassesmod && (G.active || !G.toggleable))
 		sightglassesmod = G.sightglassesmod

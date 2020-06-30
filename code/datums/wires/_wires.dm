@@ -45,6 +45,8 @@
  */
 
 #define MAX_FLAG 65535
+#define MONOCHROMY 1
+#define BLINDED 2
 
 /proc/is_wire_tool(obj/item/I)
 	if(ismultitool(I))
@@ -55,7 +57,8 @@
 		return TRUE
 	return
 
-var/list/same_wires = list()
+var/global/list/same_wires = list()
+var/global/list/same_wire_colors_monochromy = list()
 
 /datum/wires
 	var/random = FALSE     // Will the wires be different for every single instance.
@@ -75,6 +78,8 @@ var/list/same_wires = list()
 
 	// All possible wires colors are here.
 	var/static/list/wire_colors = list("red", "blue", "green", "black", "orange", "brown", "gold", "gray", "cyan", "navy", "purple", "pink")
+	// Colors for Color blind in hex
+	var/list/wire_colors_monochromy
 
 /datum/wires/New(atom/holder)
 	..()
@@ -82,6 +87,7 @@ var/list/same_wires = list()
 
 	wires = list()
 	signallers = list()
+	wire_colors_monochromy = list()
 
 	if(!istype(holder, holder_type))
 		CRASH("Our holder is null/the wrong type!")
@@ -95,10 +101,11 @@ var/list/same_wires = list()
 		// We don't have any wires to copy yet, generate some and then copy it.
 		if(!same_wires[holder_type])
 			randomize_wires()
-			same_wires[holder_type] = src.wires.Copy()
+			same_wires[holder_type] = wires.Copy()
+			same_wire_colors_monochromy[holder_type] = wire_colors_monochromy.Copy()
 		else
-			var/list/exist_wires = same_wires[holder_type]
-			wires = exist_wires // Reference the wires list.
+			wires = same_wires[holder_type] // Reference the wires list.
+			wire_colors_monochromy = same_wire_colors_monochromy[holder_type]
 
 /datum/wires/Destroy()
 	wires = null
@@ -112,8 +119,8 @@ var/list/same_wires = list()
 	//Generate our indexes
 	for(var/i = 1; i < MAX_FLAG && i < (1 << wire_count); i += i)
 		indexes_to_pick += i
-	colors_to_pick.len = wire_count // Downsize it to our specifications.
 
+	colors_to_pick.len = wire_count // Downsize it to our specifications.
 	while(colors_to_pick.len && indexes_to_pick.len)
 		// Pick and remove a color
 		var/color = pick_n_take(colors_to_pick)
@@ -121,6 +128,26 @@ var/list/same_wires = list()
 		// Pick and remove an index
 		var/index = pick_n_take(indexes_to_pick)
 		wires[color] = index
+
+	for(var/i in wires)
+		var/color_hex = color_by_hex[i]
+
+		if(!color_hex)
+			var/color = pick("#000000", "#dcdcdc", "#ffffff", "#808080")
+			wire_colors_monochromy += color
+			continue
+
+		var/r = hex2num(copytext(color_hex, 2, 4))
+		var/g = hex2num(copytext(color_hex, 4, 6))
+		var/b = hex2num(copytext(color_hex, 6, 8))
+		var/new_color = (0.58 * r) + (0.17 * g) + (0.8 * b)
+
+		if(0 <= new_color && new_color <= 30)
+			wire_colors_monochromy += "#000000"
+		else if(221 <= new_color && new_color <= 255) // 221 becauce we have name of color for 220
+			wire_colors_monochromy += "#ffffff"
+		else
+			wire_colors_monochromy += rgb(new_color, new_color, new_color)
 
 /**
  * Will return TRUE if wires menu successful opened.
@@ -132,7 +159,13 @@ var/list/same_wires = list()
 	if(additional_checks_and_effects(user))
 		return FALSE
 
-	var/html = get_interact_window()
+	var/see_effect
+	if(HAS_TRAIT(user, TRAIT_BLIND))
+		see_effect = BLINDED
+	else if(HAS_TRAIT(user, TRAIT_MONOCHROMY))
+		see_effect = MONOCHROMY
+
+	var/html = get_interact_window(see_effect)
 
 	user.set_machine(holder)
 
@@ -153,14 +186,23 @@ var/list/same_wires = list()
  * >   . += "<br>Some light is [E.some_status ? "off" : "on"]."
  * >   . += "<br>Another light is [E.another_status ? "off" : "blinking"]."
  */
-/datum/wires/proc/get_interact_window()
+/datum/wires/proc/get_interact_window(see_effect)
 	var/html = "<fieldset class='block'>"
 	html += "<legend><h3>Exposed Wires</h3></legend>"
 	html += "<table[table_options]>"
 
+	var/i = 0
 	for(var/color in wires)
+		i += 1
 		html += "<tr>"
-		html += "<td[row_options1]><font color='[color]'><b>[capitalize(color)]</b></font></td>"
+		switch(see_effect)
+			if(MONOCHROMY)
+				var/mcolor = hex2color(wire_colors_monochromy[i]) ? hex2color(wire_colors_monochromy[i]) : "Gray"
+				html += "<td[row_options1]><font color='[wire_colors_monochromy[i]]'><b>[capitalize(mcolor)]</b></font></td>"
+			if(BLINDED)
+				html += "<td[row_options1]><font color='gray'><b>Wire</b></font></td>"
+			else
+				html += "<td[row_options1]><font color='[color]'><b>[capitalize(color)]</b></font></td>"
 		html += "<td[row_options2]>"
 		html += "<a href='?src=\ref[src];action=1;cut=[color]'>[is_color_cut(color) ? "Mend" :  "Cut"]</a>"
 		html += "<a href='?src=\ref[src];action=1;pulse=[color]'>Pulse</a>"
@@ -357,3 +399,5 @@ var/list/same_wires = list()
 
 
 #undef MAX_FLAG
+#undef MONOCHROMY
+#undef BLINDED

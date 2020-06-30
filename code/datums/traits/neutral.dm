@@ -42,3 +42,19 @@
 		var/datum/species/S = all_species[specie_name]
 		if(S.taste_sensitivity == TASTE_SENSITIVITY_NO_TASTE)
 			. |= specie_name
+
+
+
+/datum/quirk/monochromy
+	name = QUIRK_MONOCHROMY
+	desc = "You stop feeling the colors of objects."
+	value = 0
+	mob_trait = TRAIT_MONOCHROMY
+	gain_text = "<span class='notice'>You don't distinguish colors!</span>"
+	lose_text = "<span class='notice'>You see the colors!</span>"
+
+	var/current_type = "greyscale"
+
+/datum/quirk/monochromy/post_add()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.inherent_sighttype = current_type
