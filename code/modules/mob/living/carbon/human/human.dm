@@ -1931,15 +1931,21 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 
 	update_hair()
 
+/mob/living/carbon/human/var/vox_ai_delay = FALSE
+
 /mob/living/carbon/human/proc/vox_get_AI()
 	set category = "IC"
 	set name = "Download new KAI"
 	set desc = "Download new KAI from ghosts"
-	for(var/mob/dead/observer/O in player_list)
-		if(role_available_in_minutes(O, ROLE_KAI))
-			continue
-		if(O.client)
-			question(O.client)
+	if(!vox_ai_delay)
+		for(var/mob/dead/observer/O in player_list)
+			if(role_available_in_minutes(O, ROLE_KAI))
+				continue
+			if(O.client)
+				question(O.client)
+		vox_ai_delay = TRUE
+		sleep(200)
+		vox_ai_delay = FALSE
 
 /mob/living/carbon/human/proc/question(client/C)
 	spawn(0)
@@ -1950,6 +1956,17 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 			V.transfer_personality(C.mob)
 
 /datum/species/vox/proc/transfer_personality(mob/candidate)
+
+	brainmob = new /mob/living/carbon/brain
+	brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI","HBL","MSO","CHRI","CDB","XSI","ORNG","GUN","KOR","MET","FRE","XIS","SLI","PKP","HOG","RZH","MRPR","JJR","FIRC","INC","PHL","BGB","ANTR","MIW","JRD","CHOC","ANCL","JLLO","JNLG","KOS","TKRG","XAL","STLP","CBOS","DUNC","FXMC","DRSD","XHS","BOB","EXAD","JMAD"))]-[rand(100, 999)]"
+	brainmob.real_name = brainmob.name
+	brainmob.loc = src
+	brainmob.container = src
+	brainmob.robot_talk_understand = 1
+	brainmob.stat = CONSCIOUS
+	brainmob.silent = 0
+	dead_mob_list -= brainmob
+
 
 	src.brainmob.mind = candidate.mind
 	//src.brainmob.key = candidate.key
