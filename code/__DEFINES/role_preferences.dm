@@ -11,6 +11,7 @@
 #define ROLE_REV               "Revolutionary"
 #define ROLE_ALIEN             "Xenomorph"
 #define ROLE_PAI               "pAI"
+#define ROLE_KAI               "kAI"
 #define ROLE_CULTIST           "Cultist"
 #define ROLE_BLOB              "Blob"
 #define ROLE_NINJA             "Ninja"

@@ -1931,6 +1931,37 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 
 	update_hair()
 
+/mob/living/carbon/human/proc/vox_get_AI()
+	set category = "IC"
+	set name = "Download new KAI"
+	set desc = "Download new KAI from ghosts"
+	for(var/mob/dead/observer/O in player_list)
+		if(role_available_in_minutes(O, ROLE_KAI))
+			continue
+		if(O.client)
+			question(O.client)
+
+/mob/living/carbon/human/proc/question(client/C)
+	spawn(0)
+		var/response = alert(C, "Someone is requesting a kAI personality. Would you like to play as a personal AI?", "pAI Request", "No", "Yes")
+		if(!C)	return		//handle logouts that happen whilst the alert is waiting for a response.
+		if(response == "Yes")
+			var/datum/species/vox/V = species
+			V.transfer_personality(C.mob)
+
+/datum/species/vox/proc/transfer_personality(mob/candidate)
+
+	src.brainmob.mind = candidate.mind
+	//src.brainmob.key = candidate.key
+	src.brainmob.ckey = candidate.ckey
+	src.name = "positronic brain ([src.brainmob.name])"
+
+	to_chat(src.brainmob, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")
+	to_chat(src.brainmob, "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>")
+	to_chat(src.brainmob, "<b>Remember, the purpose of your existence is to serve the crew and the station. Above all else, do no harm.</b>")
+	to_chat(src.brainmob, "<b>Use say :b to speak to other artificial intelligences.</b>")
+	src.brainmob.mind.assigned_role = "Positronic Brain"
+
 /mob/living/carbon/human/proc/IPC_toggle_screen()
 	set category = "IC"
 	set name = "Toggle IPC Screen"

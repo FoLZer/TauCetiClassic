@@ -131,7 +131,7 @@
 	var/list/prevent_survival_kit_items = list()
 
 	var/list/replace_outfit = list()
-	
+
 	var/min_age = 25 // The default, for Humans.
 	var/max_age = 85
 
@@ -307,7 +307,7 @@
 		SPRITE_SHEET_SUIT = 'icons/mob/species/unathi/suit.dmi',
 		SPRITE_SHEET_SUIT_FAT = 'icons/mob/species/unathi/suit_fat.dmi'
 	)
-	
+
 	replace_outfit = list(
 			/obj/item/clothing/shoes/boots/combat = /obj/item/clothing/shoes/boots/combat/cut
 			)
@@ -376,7 +376,7 @@
 		SPRITE_SHEET_SUIT = 'icons/mob/species/tajaran/suit.dmi',
 		SPRITE_SHEET_SUIT_FAT = 'icons/mob/species/tajaran/suit_fat.dmi'
 	)
-	
+
 	replace_outfit = list(
 			/obj/item/clothing/shoes/boots/combat = /obj/item/clothing/shoes/boots/combat/cut,
 			)
@@ -442,6 +442,8 @@
 	force_racial_language = TRUE
 	unarmed_type = /datum/unarmed_attack/claws	//I dont think it will hurt to give vox claws too.
 	dietflags = DIET_OMNI
+
+	var/mob/living/carbon/brain/brainmob = null
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -536,6 +538,7 @@
 
 	else
 		H.verbs += /mob/living/carbon/human/proc/gut
+		H.verbs += /mob/living/carbon/human/proc/vox_get_AI
 
 	return ..()
 
@@ -550,6 +553,7 @@
 
 	else
 		H.verbs -= /mob/living/carbon/human/proc/gut
+		H.verbs -= /mob/living/carbon/human/proc/vox_get_AI
 
 	return ..()
 
