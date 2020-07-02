@@ -152,7 +152,7 @@
 
 	if(safety<2)
 		safety = safety + 1
-		to_chat(user, "<span class='warning'>You hear a click from the [src]!</span>")
+		to_chat(user, "<span class='warning'>You can't press trigger on the [src]!</span>")
 		playsound(user, 'sound/weapons/guns/empty.ogg', VOL_EFFECTS_MASTER)
 		return
 
