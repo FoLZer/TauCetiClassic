@@ -133,6 +133,12 @@
 	if(isrobot(user))
 		return
 
+	if(iswrench(I) && !user.is_busy(src) && I.use_tool(src, user, 40, volume = 50))
+		anchored = !anchored
+		visible_message("<span class='warning'>[src] has been [anchored ? "secured to the floor" : "unsecured from the floor"] by [user].</span>")
+		playsound(src, 'sound/items/Deconstruct.ogg', VOL_EFFECTS_MASTER)
+		return
+
 	if (istype(W, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = W
 		if(iscarbon(G.affecting))
