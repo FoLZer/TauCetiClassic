@@ -9,6 +9,12 @@
 	else
 		to_chat(loc, "You will now only fire once, then lower your aim, when your target moves.")
 
+/obj/item/weapon/gun/verb/toggle_safe()
+	set name = "Toggle Safety"
+	set category = "Object"
+	toggle_safety()
+	to_chat(usr,"You toggled safety on the gun.")
+
 /obj/item/weapon/gun/verb/lower_aim()
 	set name = "Lower Aim"
 	set category = "Object"

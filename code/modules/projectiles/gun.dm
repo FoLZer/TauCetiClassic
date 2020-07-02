@@ -16,6 +16,7 @@
 	attack_verb = list("struck", "hit", "bashed")
 	action_button_name = "Switch Gun"
 	can_be_holstered = TRUE
+	var/safety = 0
 	var/obj/item/ammo_casing/chambered = null
 	var/fire_sound = 'sound/weapons/guns/Gunshot.ogg'
 	var/silenced = 0
@@ -101,6 +102,12 @@
 				return
 	..()
 
+/obj/item/weapon/gun/proc/toggle_safety()
+	if(safety<2)
+		safety = 2
+	else
+		safety = 0
+
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, params, reflex = 0, point_blank = FALSE)//TODO: go over this
 	//Exclude lasertag guns from the CLUMSY check.
 	if(!user.IsAdvancedToolUser())
@@ -143,9 +150,16 @@
 	if(!special_check(user, target))
 		return
 
+	if(safety<2)
+		safety = safety + 1
+		to_chat(user, "<span class='warning'>You hear a click from the [src]!</span>")
+		playsound(user, 'sound/weapons/guns/empty.ogg', VOL_EFFECTS_MASTER)
+		return
+
 	if (!ready_to_fire())
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
+			playsound(user, 'sound/weapons/guns/empty.ogg', VOL_EFFECTS_MASTER)
 		return
 	if(chambered)
 		if(point_blank)
