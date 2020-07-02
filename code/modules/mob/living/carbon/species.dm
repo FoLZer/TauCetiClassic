@@ -535,10 +535,10 @@
 			H.hud_used.adding += H.leap_icon
 		if(H.client)
 			H.client.screen += H.leap_icon
+		H.verbs += /mob/living/carbon/human/proc/vox_get_AI
 
 	else
 		H.verbs += /mob/living/carbon/human/proc/gut
-		H.verbs += /mob/living/carbon/human/proc/vox_get_AI
 
 	return ..()
 
@@ -550,10 +550,10 @@
 			if(H.client)
 				H.client.screen -= H.leap_icon
 			QDEL_NULL(H.leap_icon)
+			H.verbs -= /mob/living/carbon/human/proc/vox_get_AI
 
 	else
 		H.verbs -= /mob/living/carbon/human/proc/gut
-		H.verbs -= /mob/living/carbon/human/proc/vox_get_AI
 
 	return ..()
 
