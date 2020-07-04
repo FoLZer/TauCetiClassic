@@ -30,6 +30,14 @@
 				/obj/item/stack/cable_coil = 1)
 	time = 30
 
+/datum/crafting_recipe/molotov
+	name = "Molotov Coctail"
+	result = /obj/item/weapon/grenade/cancasing/molotov
+	reqs = list(/datum/reagent/fuel = 150,
+				code\modules\reagents\reagent_containers\food\drinks\bottle = 1,
+				/obj/item/stack/medical/bruise_pack/rags = 2)
+	time = 30
+
 /datum/crafting_recipe/wirerod
 	name = "Wirerod"
 	result = /obj/item/weapon/wirerod

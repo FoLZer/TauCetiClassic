@@ -77,9 +77,75 @@
 	explosion(loc, 0, 0, range)
 	qdel(src)
 
+/obj/item/weapon/grenade/cancasing/molotov/prime()
+	var/list/turflist = circlerangeturfs(loc,3)
+	explosion(loc, 0, 0, 1)
+	for(var/turf/T in turflist)
+		new /obj/effect/decal/cleanable/liquid_fuel(T,4)
+		sleep(1)
+		T.hotspot_expose(600,700)
+	qdel(src)
+
 /obj/item/weapon/grenade/cancasing/examine(mob/user)
 	..()
 	to_chat(user, "You can't tell when it will explode!")
+
+/obj/item/weapon/grenade/cancasing/molotov
+	icon_state = "can_grenade_rag_preview"
+
+/obj/item/weapon/grenade/cancasing/molotov/update_icon()
+	if(can_icon && can_icon_state)
+		icon = can_icon
+		icon_state = can_icon_state
+
+	var/list/overlays_list = list()
+
+	var/mutable_appearance/I = mutable_appearance('icons/obj/makeshift.dmi', "can_grenade_rag_wired")
+	if(wire_color)
+		I.color = wire_color
+	overlays_list += I
+
+	overlays_list += image('icons/obj/makeshift.dmi', "can_grenade_rag")
+
+	if(active)
+		overlays_list += image('icons/obj/makeshift.dmi', "can_grenade_rag_active")
+
+	cut_overlays()
+	add_overlay(overlays_list)
+
+/obj/item/weapon/grenade/cancasing/molotov/attack_self(mob/user)
+	return
+
+/obj/item/weapon/grenade/cancasing/molotov/attackby(obj/item/I, mob/user, params)
+	if(active)
+		return
+
+	var/is_W_lit = FALSE
+	if(istype(I, /obj/item/weapon/match))
+		var/obj/item/weapon/match/O = I
+		if(O.lit)
+			is_W_lit = TRUE
+	else if(istype(I, /obj/item/weapon/lighter))
+		var/obj/item/weapon/lighter/O = I
+		if(O.lit)
+			is_W_lit = TRUE
+	else if(iswelder(I))
+		var/obj/item/weapon/weldingtool/O = I
+		if(O.welding)
+			is_W_lit = TRUE
+
+	if(!is_W_lit)
+		return ..()
+
+	if(!clown_check(user))
+		return ..()
+
+	user.visible_message("<span class='warning'>[bicon(src)] [user] lights up \the [src] with \the [I]!</span>", "<span class='warning'>[bicon(src)] You light \the [name] with \the [I]!</span>")
+	activate(user)
+	add_fingerprint(user)
+	if(iscarbon(user) && istype(user.get_inactive_hand(), src))
+		var/mob/living/carbon/C = user
+		C.throw_mode_on()
 
 /obj/item/weapon/grenade/cancasing/rag
 	icon_state = "can_grenade_rag_preview"
