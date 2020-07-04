@@ -408,12 +408,3 @@
 		owner.eye_blurry = 20
 	if(is_broken())
 		owner.eye_blind = 20
-
-/obj/item/organ/internal/kidneys/resomi
-	parent_bodypart = BP_CHEST
-
-/obj/item/organ/internal/liver/resomi
-	parent_bodypart = BP_CHEST
-
-/obj/item/organ/internal/eyes/resomi
-	parent_bodypart = BP_HEAD

@@ -131,7 +131,7 @@
 	var/list/prevent_survival_kit_items = list()
 
 	var/list/replace_outfit = list()
-
+	
 	var/min_age = 25 // The default, for Humans.
 	var/max_age = 85
 
@@ -307,7 +307,7 @@
 		SPRITE_SHEET_SUIT = 'icons/mob/species/unathi/suit.dmi',
 		SPRITE_SHEET_SUIT_FAT = 'icons/mob/species/unathi/suit_fat.dmi'
 	)
-
+	
 	replace_outfit = list(
 			/obj/item/clothing/shoes/boots/combat = /obj/item/clothing/shoes/boots/combat/cut
 			)
@@ -376,7 +376,7 @@
 		SPRITE_SHEET_SUIT = 'icons/mob/species/tajaran/suit.dmi',
 		SPRITE_SHEET_SUIT_FAT = 'icons/mob/species/tajaran/suit_fat.dmi'
 	)
-
+	
 	replace_outfit = list(
 			/obj/item/clothing/shoes/boots/combat = /obj/item/clothing/shoes/boots/combat/cut,
 			)
@@ -751,7 +751,7 @@
 	// IPCs heat up until ~306C. No more 2000C IPCs
 	synth_temp_max = 550
 
-	brute_mod = 1.2
+	brute_mod = 1.5
 	burn_mod = 1
 	oxy_mod = 0
 	tox_mod = 0
@@ -1281,65 +1281,3 @@
 
 /datum/species/slime/call_digest_proc(mob/living/M, datum/reagent/R)
 	return R.on_slime_digest(M)
-
-/datum/species/resomi
-	name = "Resomi"
-
-	min_age = 15
-	max_age = 45
-
-	flesh_color = "#5f7bb0"
-	base_color = "#001144"
-	tail = "resomitail"
-
-	blood_datum_path = /datum/dirt_cover/purple_blood
-
-	icobase = 			'icons/mob/human_races/r_resomi.dmi'
-	deform = 			'icons/mob/human_races/r_resomi.dmi'
-	damage_mask = 		TRUE
-
-	darksight = 2
-	total_health = 150
-	brute_mod = 1.35
-	burn_mod =  1.35
-	metabolism_mod = METABOLISM_FACTOR
-	//mob_size = MOB_SMALL //TODO: ADD
-	dietflags = DIET_OMNI
-	taste_sensitivity = TASTE_SENSITIVITY_NORMAL
-	body_temperature = 314.15
-
-	cold_level_1 = 180
-	cold_level_2 = 130
-	cold_level_3 = 70
-	heat_level_1 = 320
-	heat_level_2 = 370
-	heat_level_3 = 600
-
-	list/has_bodypart = list(
-		BP_CHEST =  /obj/item/organ/external/chest,
-		BP_GROIN =  /obj/item/organ/external/groin,
-		BP_HEAD =   /obj/item/organ/external/head,
-		BP_L_ARM =  /obj/item/organ/external/l_arm,
-		BP_R_ARM =  /obj/item/organ/external/r_arm,
-		BP_L_LEG =  /obj/item/organ/external/l_leg,
-		BP_R_LEG =  /obj/item/organ/external/r_leg,
-		)
-
-	list/has_organ = list(
-		BP_HEART =    /obj/item/organ/internal/heart,
-		BP_LUNGS =    /obj/item/organ/internal/lungs,
-		BP_LIVER =    /obj/item/organ/internal/liver/resomi,
-		BP_KIDNEYS =  /obj/item/organ/internal/kidneys/resomi,
-		BP_BRAIN =    /obj/item/organ/internal/brain,
-		BP_EYES =     /obj/item/organ/internal/eyes/resomi
-		)
-
-	unarmed_type = /datum/unarmed_attack/claws
-
-/datum/species/resomi/on_gain(mob/living/M)
-	M.verbs += /mob/living/carbon/human/proc/resomi_sonar_ping
-	M.verbs += /mob/living/proc/toggle_pass_table
-
-/datum/species/resomi/on_loose(mob/living/M)
-	M.verbs -= /mob/living/carbon/human/proc/resomi_sonar_ping
-	M.verbs -= /mob/living/proc/toggle_pass_table
