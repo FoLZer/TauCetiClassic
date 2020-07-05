@@ -77,21 +77,59 @@
 	explosion(loc, 0, 0, range)
 	qdel(src)
 
-/obj/item/weapon/grenade/cancasing/molotov/prime()
-	var/list/turflist = circlerangeturfs(loc,3)
-	explosion(loc, 0, 0, 1)
-	for(var/turf/T in turflist)
-		new /obj/effect/decal/cleanable/liquid_fuel(T,4)
-		sleep(1)
-		T.hotspot_expose(600,700)
-	qdel(src)
-
 /obj/item/weapon/grenade/cancasing/examine(mob/user)
 	..()
 	to_chat(user, "You can't tell when it will explode!")
 
 /obj/item/weapon/grenade/cancasing/molotov
-	icon_state = "can_grenade_rag_preview"
+	icon_state = "molotov"
+	var/list/turfs = list()
+
+/obj/item/weapon/grenade/cancasing/molotov/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+	//if(!active)
+	//	return
+	explosion(hit_atom, 0, 0, 1)
+	var/turf/T = hit_atom
+	new /obj/effect/decal/cleanable/liquid_fuel(T,1)
+	turfs.Add(T)
+	spawn(1)
+		T.hotspot_expose(400,500)
+		prime_rec(T,get_step(T,NORTH),3,NORTH)
+		prime_rec(T,get_step(T,WEST),3,WEST)
+		prime_rec(T,get_step(T,SOUTH),3,SOUTH)
+		prime_rec(T,get_step(T,EAST),3,EAST)
+	qdel(src)
+
+/obj/item/weapon/grenade/cancasing/molotov/proc/prime_rec(var/turf/P,var/turf/T,var/fire_pow,direction)
+	if(!T.is_plating())
+		return
+	if(!fire_pow)
+		return
+	spawn(3)
+		if(!(T in turfs))
+			new /obj/effect/decal/cleanable/liquid_fuel(T,1)
+			spawn(1)
+				T.hotspot_expose(400,500)
+			turfs.Add(T)
+		fire_pow -= 1
+		prime_rec(T,get_step(T,direction),fire_pow,direction)
+		fire_pow -= 1
+		if(fire_pow > 0)
+			prime_rec(T,get_step(T,turn(direction,90)),fire_pow,turn(direction,90))
+			prime_rec(T,get_step(T,turn(direction,-90)),fire_pow,turn(direction,-90))
+
+/obj/item/weapon/grenade/cancasing/molotov/prime()
+	explosion(loc, 0, 0, 1)
+	var/turf/T = loc
+	new /obj/effect/decal/cleanable/liquid_fuel(T,1)
+	turfs.Add(T)
+	spawn(1)
+		T.hotspot_expose(400,500)
+		prime_rec(T,get_step(T,NORTH),3,NORTH)
+		prime_rec(T,get_step(T,WEST),3,WEST)
+		prime_rec(T,get_step(T,SOUTH),3,SOUTH)
+		prime_rec(T,get_step(T,EAST),3,EAST)
+	qdel(src)
 
 /obj/item/weapon/grenade/cancasing/molotov/update_icon()
 	if(can_icon && can_icon_state)
