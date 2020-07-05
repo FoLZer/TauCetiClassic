@@ -82,6 +82,7 @@
 	to_chat(user, "You can't tell when it will explode!")
 
 /obj/item/weapon/grenade/cancasing/molotov
+	name = "Molotov Coctail"
 	icon_state = "molotov"
 	var/list/turfs = list()
 
