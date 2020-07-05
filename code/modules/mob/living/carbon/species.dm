@@ -131,7 +131,7 @@
 	var/list/prevent_survival_kit_items = list()
 
 	var/list/replace_outfit = list()
-	
+
 	var/min_age = 25 // The default, for Humans.
 	var/max_age = 85
 
@@ -307,7 +307,7 @@
 		SPRITE_SHEET_SUIT = 'icons/mob/species/unathi/suit.dmi',
 		SPRITE_SHEET_SUIT_FAT = 'icons/mob/species/unathi/suit_fat.dmi'
 	)
-	
+
 	replace_outfit = list(
 			/obj/item/clothing/shoes/boots/combat = /obj/item/clothing/shoes/boots/combat/cut
 			)
@@ -376,7 +376,7 @@
 		SPRITE_SHEET_SUIT = 'icons/mob/species/tajaran/suit.dmi',
 		SPRITE_SHEET_SUIT_FAT = 'icons/mob/species/tajaran/suit_fat.dmi'
 	)
-	
+
 	replace_outfit = list(
 			/obj/item/clothing/shoes/boots/combat = /obj/item/clothing/shoes/boots/combat/cut,
 			)
@@ -751,7 +751,7 @@
 	// IPCs heat up until ~306C. No more 2000C IPCs
 	synth_temp_max = 550
 
-	brute_mod = 1.5
+	brute_mod = 1.2
 	burn_mod = 1
 	oxy_mod = 0
 	tox_mod = 0
