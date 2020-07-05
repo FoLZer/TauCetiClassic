@@ -13,6 +13,8 @@
 
 	var/on = 0
 	var/visible = 0
+	var/direction = 0
+	var/prev_dir = 0
 	var/obj/effect/beam/i_beam/first = null
 	var/obj/effect/beam/i_beam/last = null
 
@@ -58,6 +60,11 @@
 	return
 
 /obj/item/device/assembly/infra/process()//Old code
+	if(prev_dir != direction)
+		prev_dir = direction
+		if(first)
+			qdel(first)
+		sleep(1)
 	if(!on)
 		if(first)
 			qdel(first)
@@ -118,7 +125,13 @@
 /obj/item/device/assembly/infra/interact(mob/user)//TODO: change this this to the wire control panel
 	if(is_secured(user))
 		user.set_machine(src)
-		var/dat = "<TT><B>Infrared Laser</B>\n<B>Status</B>: [on ? "<A href='?src=\ref[src];state=0'>On</A>" : "<A href='?src=\ref[src];state=1'>Off</A>"]<BR>\n<B>Visibility</B>: [visible ? "<A href='?src=\ref[src];visible=0'>Visible</A>" : "<A href='?src=\ref[src];visible=1'>Invisible</A>"]<BR>\n</TT>"
+		var/dirstring = ""
+		switch(direction)
+			if(0) dirstring = "SOUTH"
+			if(1) dirstring = "EAST"
+			if(2) dirstring = "NORTH"
+			if(3) dirstring = "WEST"
+		var/dat = "<TT><B>Infrared Laser</B>\n<B>Status</B>: [on ? "<A href='?src=\ref[src];state=0'>On</A>" : "<A href='?src=\ref[src];state=1'>Off</A>"]<BR>\n<B>Visibility</B>: [visible ? "<A href='?src=\ref[src];visible=0'>Visible</A>" : "<A href='?src=\ref[src];visible=1'>Invisible</A>"]<BR>\n<B>Direction</B>: <A href='?src=\ref[src];dir=1'>[dirstring]</A>\n</TT>"
 		dat += "<BR><BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 		dat += "<BR><BR><A href='?src=\ref[src];close=1'>Close</A>"
 		user << browse(entity_ja(dat), "window=infra")
@@ -145,6 +158,13 @@
 			lastsignalers.Add("[time_start] <B>:</B> (NO USER FOUND) set [src] [on?"On":"Off"] @ location ([T.x],[T.y],[T.z])")
 			message_admins("( NO USER FOUND) set [src] [on?"On":"Off"], location ([T.x],[T.y],[T.z])")
 			log_game("(NO USER FOUND) set [src] [on?"On":"Off"], location ([T.x],[T.y],[T.z])")
+
+	if(href_list["dir"])
+		if(direction < 3)
+			direction += 1
+		else
+			direction = 0
+		dir = turn(dir, 90)
 
 	if(href_list["visible"])
 		visible = !(visible)
