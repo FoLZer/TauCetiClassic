@@ -1814,3 +1814,135 @@
 	icon_state = "dio_brush"
 	do_colouration = FALSE
 	species_allowed = list(DIONA)
+
+/datum/sprite_accessory/hair/vulpkanin
+    species_allowed = list("Vulpkanin")
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_kajam
+	name = "Kajam"
+	icon_state = "kajam"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_keid
+	name = "Keid"
+	icon_state = "keid"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_adhara
+	name = "Adhara"
+	icon_state = "adhara"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_kleeia
+	name = "Kleeia"
+	icon_state = "kleeia"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_mizar
+	name = "Mizar"
+	icon_state = "mizar"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_apollo
+	name = "Apollo"
+	icon_state = "apollo"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_belle
+	name = "Belle"
+	icon_state = "belle"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_bun
+	name = "Bun"
+	icon_state = "bun"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_jagged
+	name = "Jagged"
+	icon_state = "jagged"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_curl
+	name = "Curl"
+	icon_state = "curl"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_hawk
+	name = "Hawk"
+	icon_state = "hawk"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_anita
+	name = "Anita"
+	icon_state = "anita"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_short
+	name = "Short"
+	icon_state = "short"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_spike
+	name = "Spike"
+	icon_state = "spike"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_braided
+	name = "Braided"
+	icon_state = "braided"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_punkbraided
+	name = "Punk Braided"
+	icon_state = "punkbraided"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_short2
+	name = "Short Alt."
+	icon_state = "short2"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_rough
+	name = "Rough-Cropped Mane"
+	icon_state = "rough"
+
+/datum/sprite_accessory/hair/vulpkanin/vulp_hair_raine
+	name = "Raine"
+	icon_state = "raine"
+	gender = FEMALE
+
+/datum/sprite_accessory/facial_hair/vulpkanin
+	species_allowed = list("Vulpkanin")
+	gender = NEUTER
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_earfluff
+	name = "Vulpkanin Earfluff"
+	icon_state = "earfluff"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_blaze
+	name = "Blaze"
+	icon_state = "blaze"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_vulpine
+	name = "Vulpine"
+	icon_state = "vulpine"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_vulpine_brows
+	name = "Vulpine and Brows"
+	icon_state = "brows"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_vulpine_fluff
+	name = "Vulpine and Earfluff"
+	icon_state = "vulpinefluff"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_mask
+	name = "Mask"
+	icon_state = "mask"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_patch
+	name = "Patch"
+	icon_state = "patch"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_ruff
+	name = "Ruff"
+	icon_state = "ruff"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_kita
+	name = "Kita"
+	icon_state = "kita"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_swift
+	name = "Swift"
+	icon_state = "swift"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_elder
+	name = "Elder"
+	icon_state = "elder"
+
+/datum/sprite_accessory/facial_hair/vulpkanin/vulp_slash
+	name = "Slash"
+	icon_state = "slash"
