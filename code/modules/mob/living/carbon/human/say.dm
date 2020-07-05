@@ -25,6 +25,8 @@
 	var/message_mode = parse_message_mode(message, "headset")
 
 	if (istype(wear_mask, /obj/item/clothing/mask/muzzle) && !(message_mode == "changeling" || message_mode == "alientalk"))  //Todo:  Add this to speech_problem_flag checks.
+		if(istype(wear_mask, /obj/item/clothing/mask/muzzle/tape))
+			usr.visible_message("<span class='warning'>[usr] tries to say something, but can't!</span>","<span class='warning'>You try to say something, but there's a duct tape on your mouth</span>")
 		return
 
 	if(copytext(message,1,2) == "*")

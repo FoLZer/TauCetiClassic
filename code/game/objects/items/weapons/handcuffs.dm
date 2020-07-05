@@ -110,3 +110,11 @@
 /obj/item/weapon/handcuffs/cyborg/attack(mob/living/carbon/C, mob/user)
 	if(!C.handcuffed)
 		place_handcuffs(C, user)
+
+/obj/item/weapon/handcuffs/cable/tape
+	name = "tape restraints"
+	desc = "DIY!"
+	icon_state = "tape_cross"
+	item_state = null
+	icon = 'icons/obj/bureaucracy.dmi'
+	breakouttime = 200

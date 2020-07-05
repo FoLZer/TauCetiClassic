@@ -9,6 +9,77 @@
 	var/tape_type = /obj/item/tape
 	var/icon_base
 
+/obj/item/taperoll/attack(var/mob/living/carbon/human/H, var/mob/user)
+	if(istype(H))
+		if(user.zone_sel.selecting == O_EYES)
+
+			if(!H.organs_by_name[BP_HEAD])
+				to_chat(user, "<span class='warning'>\The [H] doesn't have a head.</span>")
+				return
+			if(!H.has_eyes())
+				to_chat(user, "<span class='warning'>\The [H] doesn't have any eyes.</span>")
+				return
+			if(H.glasses)
+				to_chat(user, "<span class='warning'>\The [H] is already wearing somethign on their eyes.</span>")
+				return
+			if(H.head && (H.head.body_parts_covered & FACE))
+				to_chat(user, "<span class='warning'>Remove their [H.head] first.</span>")
+				return
+			user.visible_message("<span class='danger'>\The [user] begins taping over \the [H]'s eyes!</span>")
+
+			if(!do_mob(user, H, 30))
+				return
+
+			// Repeat failure checks.
+			if(!H || !src || !H.organs_by_name[BP_HEAD] || !H.has_eyes() || H.glasses || (H.head && (H.head.body_parts_covered & FACE)))
+				return
+
+			playsound(src, 'sound/effects/tape.ogg',25)
+			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s eyes!</span>")
+			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/blindfold/tape(H), SLOT_GLASSES)
+
+		else if(user.zone_sel.selecting == O_MOUTH || user.zone_sel.selecting == BP_HEAD)
+			if(!H.organs_by_name[BP_HEAD])
+				to_chat(user, "<span class='warning'>\The [H] doesn't have a head.</span>")
+				return
+			if(!(H.flags & IS_SYNTHETIC))
+				to_chat(user, "<span class='warning'>\The [H] doesn't have a mouth.</span>")
+				return
+			if(H.wear_mask)
+				to_chat(user, "<span class='warning'>\The [H] is already wearing a mask.</span>")
+				return
+			if(H.head && (H.head.body_parts_covered & FACE))
+				to_chat(user, "<span class='warning'>Remove their [H.head] first.</span>")
+				return
+			playsound(src, 'sound/effects/tape.ogg',25)
+			user.visible_message("<span class='danger'>\The [user] begins taping up \the [H]'s mouth!</span>")
+
+			if(!do_mob(user, H, 30))
+				return
+
+			// Repeat failure checks.
+			if(!H || !src || !H.organs_by_name[BP_HEAD] || !(H.flags & IS_SYNTHETIC) || H.wear_mask || (H.head && (H.head.body_parts_covered & FACE)))
+				return
+			playsound(src, 'sound/effects/tape.ogg',25)
+			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s mouth!</span>")
+			H.equip_to_slot_or_del(new /obj/item/clothing/mask/muzzle/tape(H), SLOT_WEAR_MASK)
+
+		else if(user.zone_sel.selecting == BP_R_ARM || user.zone_sel.selecting == BP_L_ARM)
+			playsound(src, 'sound/effects/tape.ogg',25)
+			var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
+			if(!T.place_handcuffs(H, user))
+				qdel(T)
+
+		else if(user.zone_sel.selecting == BP_CHEST)
+			if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
+				H.wear_suit.attackby(src, user)//everything is handled by attackby
+			else
+				to_chat(user, "<span class='warning'>\The [H] isn't wearing a spacesuit for you to reseal.</span>")
+
+		else
+			return ..()
+		return 1
+
 /obj/item/tape
 	name = "tape"
 	icon = 'icons/obj/tape.dmi'
