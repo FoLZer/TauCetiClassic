@@ -86,8 +86,8 @@
 	var/list/turfs = list()
 
 /obj/item/weapon/grenade/cancasing/molotov/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	//if(!active)
-	//	return
+	if(!active)
+		return
 	explosion(hit_atom, 0, 0, 1)
 	var/turf/T = hit_atom
 	new /obj/effect/decal/cleanable/liquid_fuel(T,1)
