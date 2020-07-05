@@ -214,6 +214,23 @@ var/global/list/breach_burn_descriptors = list(
 
 		repair_breaches(BRUTE, 3, user)
 		return
+	else if(istype(I, /obj/item/taperoll))
+		var/datum/breach/target_breach		//Target the largest unpatched breach.
+		for(var/datum/breach/B in breaches)
+			if(!target_breach || (B.class > target_breach.class))
+				target_breach = B
+
+		if(!target_breach)
+			to_chat(user, "There are no open breaches to seal with \the [I].")
+		else
+			playsound(src, 'sound/effects/tape.ogg',VOL_EFFECTS_MASTER, 30, null, -2)
+			var/mob/living/carbon/human/H = user
+			if(!H) return
+			user.SetNextMove(CLICK_CD_INTERACT)
+			if(do_after(user, H.wear_suit == src? 60 : 30, target = src)) //Sealing a breach on your own suit is awkward and time consuming
+				user.visible_message("<b>[user]</b> uses \the [I] to seal \the [target_breach.descriptor] on \the [src].")
+				repair_breaches(BRUTE, 1, user)
+		return
 
 	return ..()
 

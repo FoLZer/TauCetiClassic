@@ -38,6 +38,35 @@
 				return
 		to_chat(user, "<span class='warning'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
 
+/obj/item/weapon/handcuffs/cable/tape/place_handcuffs(mob/living/carbon/target, mob/user)
+	if(user.is_busy(target))
+		return
+
+	if (ishuman(target) || isIAN(target) || ismonkey(target))
+		target.log_combat(user, "handcuffed (attempt) with [name]")
+
+		if(do_mob(user, target, HUMAN_STRIP_DELAY) && mob_can_equip(target, SLOT_HANDCUFFED))
+			if(!isrobot(user) && !isIAN(user) && user != target)
+				var/grabbing = FALSE
+				for (var/obj/item/weapon/grab/G in target.grabbed_by)
+					if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
+						grabbing = TRUE
+						break
+				if (!grabbing)
+					to_chat(user, "<span class='warning'>Your grasp was broken before you could restrain [target]!</span>")
+					return
+
+			var/obj/item/weapon/handcuffs/cuffs = src
+			if(!dispenser)
+				user.remove_from_mob(cuffs)
+			else
+				cuffs = new type
+
+			target.equip_to_slot(cuffs, SLOT_HANDCUFFED, TRUE)
+			target.attack_log += "\[[time_stamp()]\] <font color='orange'>[user.name] ([user.ckey]) placed on our [target.slot_id_to_name(SLOT_HANDCUFFED)] ([cuffs])</font>"
+			user.attack_log += "\[[time_stamp()]\] <font color='red'>Placed on [target.name]'s ([target.ckey]) [target.slot_id_to_name(SLOT_HANDCUFFED)] ([cuffs])</font>"
+
+
 /obj/item/weapon/handcuffs/proc/place_handcuffs(mob/living/carbon/target, mob/user)
 	if(user.is_busy(target))
 		return
