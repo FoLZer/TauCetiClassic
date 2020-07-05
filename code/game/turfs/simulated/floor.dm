@@ -541,10 +541,12 @@ var/list/wood_icons = list("wood","wood-broken")
 	else if(iswelder(C) && is_plating())
 		var/obj/item/weapon/weldingtool/welder = C
 		if(!broken && !burnt && welder.isOn())
-			new floor_type(src)
-			to_chat(user, "<span class='warning'>You remove the plating!</span>")
-			Destroy()
-			playsound(src, 'sound/items/Welder.ogg', VOL_EFFECTS_MASTER)
+			if(user.is_busy()) return
+			if(C.use_tool(src, user, 100, volume = 50))
+				new /obj/item/stack/tile/plasteel(src)
+				to_chat(user, "<span class='warning'>You remove the plating!</span>")
+				ChangeTurf(/turf/space)
+				playsound(src, 'sound/items/Welder.ogg', VOL_EFFECTS_MASTER)
 
 	if(isscrewdriver(C))
 		if(is_wood_floor())
