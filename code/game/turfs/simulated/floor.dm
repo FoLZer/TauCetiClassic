@@ -540,8 +540,8 @@ var/list/wood_icons = list("wood","wood-broken")
 		return
 	else if(iswelder(C) && is_plating())
 		var/obj/item/weapon/weldingtool/welder = C
-		if(!broken && !burnt && C.isOn())
-			var/obj/item/I = new floor_type(src)
+		if(!broken && !burnt && welder.isOn())
+			new floor_type(src)
 			to_chat(user, "<span class='warning'>You remove the plating!</span>")
 			Destroy()
 			playsound(src, 'sound/items/Welder.ogg', VOL_EFFECTS_MASTER)
