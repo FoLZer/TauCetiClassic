@@ -15,7 +15,7 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 	//Species-specific stuff.
-	species_restricted = list("exclude", UNATHI, TAJARAN, SKRELL, DIONA, VOX)
+	species_restricted = list("exclude", UNATHI, TAJARAN, SKRELL, DIONA, VOX, VULPKANIN)
 	species_restricted_locked = TRUE
 	sprite_sheets_refit = list(
 		UNATHI = 'icons/mob/species/unathi/helmet.dmi',
@@ -60,7 +60,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted_locked = TRUE
-	species_restricted = list("exclude" , UNATHI , TAJARAN , DIONA , VOX)
+	species_restricted = list("exclude" , UNATHI , TAJARAN , DIONA , VOX, VULPKANIN)
 	sprite_sheets_refit = list(
 		UNATHI = 'icons/mob/species/unathi/suit.dmi',
 		TAJARAN = 'icons/mob/species/tajaran/suit.dmi',
@@ -747,7 +747,7 @@
 	               /obj/item/weapon/melee/baton,
 	               /obj/item/weapon/melee/energy/sword,
 	               /obj/item/weapon/handcuffs)
-	species_restricted = list("exclude" , UNATHI , TAJARAN , DIONA, VOX)
+	species_restricted = list("exclude" , UNATHI , TAJARAN , DIONA, VOX, VULPKANIN)
 	action_button_name = "Toggle space suit mode"
 	max_mounted_devices = 4
 	initial_modules = list(/obj/item/rig_module/simple_ai, /obj/item/rig_module/selfrepair)

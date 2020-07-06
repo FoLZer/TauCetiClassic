@@ -1283,7 +1283,7 @@
 	return R.on_slime_digest(M)
 
 /datum/species/vulpkanin
-	name = "Vulpkanin"
+	name = VULPKANIN
 	icobase = 'icons/mob/human_races/r_vulpkanin.dmi'
 	deform = 'icons/mob/human_races/r_vulpkanin.dmi'
 	language = "Canilunzt"

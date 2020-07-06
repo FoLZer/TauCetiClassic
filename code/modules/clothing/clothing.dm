@@ -141,7 +141,7 @@ var/global/list/icon_state_allowed_cache = list()
 	//Set species_restricted list
 	switch(target_species)
 		if(HUMAN , SKRELL)	//humanoid bodytypes
-			species_restricted = list("exclude" , UNATHI , TAJARAN , DIONA , VOX, VOX_ARMALIS)
+			species_restricted = list("exclude" , UNATHI , TAJARAN , DIONA , VOX, VOX_ARMALIS, VULPKANIN)
 		else
 			species_restricted = list(target_species)
 
@@ -161,9 +161,9 @@ var/global/list/icon_state_allowed_cache = list()
 	//Set species_restricted list
 	switch(target_species)
 		if(SKRELL)
-			species_restricted = list("exclude" , UNATHI , TAJARAN , DIONA , VOX, VOX_ARMALIS)
+			species_restricted = list("exclude" , UNATHI , TAJARAN , DIONA , VOX, VOX_ARMALIS, VULPKANIN)
 		if(HUMAN)
-			species_restricted = list("exclude" , SKRELL , UNATHI , TAJARAN , DIONA , VOX, VOX_ARMALIS)
+			species_restricted = list("exclude" , SKRELL , UNATHI , TAJARAN , DIONA , VOX, VOX_ARMALIS, VULPKANIN)
 		else
 			species_restricted = list(target_species)
 
@@ -430,7 +430,7 @@ BLIND     // can't see anything
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.2
-	species_restricted = list("exclude", DIONA, VOX, VOX_ARMALIS)
+	species_restricted = list("exclude", DIONA, VOX, VOX_ARMALIS, VULPKANIN)
 /obj/item/clothing/suit/space
 	name = "space suit"
 	desc = "A suit that protects against low pressure environments. \"NSS EXODUS\" is written in large block letters on the back."
@@ -450,7 +450,7 @@ BLIND     // can't see anything
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.2
-	species_restricted = list("exclude", DIONA, VOX, VOX_ARMALIS)
+	species_restricted = list("exclude", DIONA, VOX, VOX_ARMALIS, VULPKANIN)
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.
 
 /obj/item/clothing/suit/space/equipped(mob/M)

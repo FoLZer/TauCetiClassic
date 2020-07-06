@@ -48,7 +48,7 @@
 /datum/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = "bald"
-	species_allowed = list(HUMAN , UNATHI , DIONA)
+	species_allowed = list(HUMAN , UNATHI , DIONA, VULPKANIN)
 
 /datum/sprite_accessory/hair/short
 	name = "Short Hair"	  // try to capatilize the names please~
@@ -1816,7 +1816,7 @@
 	species_allowed = list(DIONA)
 
 /datum/sprite_accessory/hair/vulpkanin
-    species_allowed = list("Vulpkanin")
+    species_allowed = list(VULPKANIN)
 
 /datum/sprite_accessory/hair/vulpkanin/vulp_hair_kajam
 	name = "Kajam"
@@ -1896,7 +1896,7 @@
 	gender = FEMALE
 
 /datum/sprite_accessory/facial_hair/vulpkanin
-	species_allowed = list("Vulpkanin")
+	species_allowed = list(VULPKANIN)
 	gender = NEUTER
 
 /datum/sprite_accessory/facial_hair/vulpkanin/vulp_earfluff
