@@ -5,22 +5,13 @@
 	name = "Nostromo-Syndicate-Spawn"
 
 /datum/game_mode/nostromo
-	name = "nuclear emergency"
-	config_tag = "nuclear"
+	name = "nostromo"
+	config_tag = "nostromo"
 	role_type = ROLE_OPERATIVE
-	required_players = 15
-	required_players_secret = 25
+	required_players = 10
+	required_players_secret = 10
 	required_enemies = 2
-	recommended_enemies = 6
-
-	votable = 0
-
-	uplink_welcome = "Corporate Backed Uplink Console:"
-	uplink_uses = 20
-
-	var/nukes_left = 1 // Call 3714-PRAY right now and order more nukes! Limited offer!
-	var/nuke_off_station = 0 //Used for tracking if the syndies actually haul the nuke to the station
-	var/syndies_didnt_escape = 0 //Used for tracking if the syndies got the shuttle off of the z-level
+	recommended_enemies = 4
 
 
 /datum/game_mode/nostromo/announce()
@@ -81,25 +72,20 @@
 /datum/game_mode/nostromo/post_setup()
 
 	var/list/turf/synd_spawn = list()
-	var/turf/synd_comm_spawn
+	var/turf/xeno_spawn
 
 	for(var/obj/effect/landmark/A in landmarks_list) //Add commander spawn places first, really should only be one though.
-		if(A.name == "Syndicate-Commander")
-			synd_comm_spawn = get_turf(A)
-			qdel(A)
-			continue
-
-	for(var/obj/effect/landmark/A in landmarks_list)
-		if(A.name == "Syndicate-Spawn")
+		if(A.name == "Nostromo-Syndicate-Spawn")
 			synd_spawn += get_turf(A)
 			qdel(A)
 			continue
 
-	var/obj/effect/landmark/uplinklocker = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly
-	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
+	for(var/obj/effect/landmark/A in landmarks_list)
+		if(A.name == "Nostromo-Alien-Spawn")
+			xeno_spawn = get_turf(A)
+			qdel(A)
+			break
 
-	var/nuke_code = "[rand(10000, 99999)]"
-	var/leader_selected = 0
 	var/spawnpos = 1
 //	var/max_age = 0
 /*	for(var/datum/mind/synd_mind in syndicates)
@@ -128,27 +114,10 @@
 			log_debug("[synd_mind] telepoting to [synd_spawn[spawnpos]]")
 			synd_mind.current.loc = synd_spawn[spawnpos]
 
-		spawn(0)
-			NukeNameAssign(synd_mind)
-
-		if(!config.objectives_disabled)
-			forge_syndicate_objectives(synd_mind)
-
 		spawnpos++
 		update_synd_icons_added(synd_mind)
 
 	update_all_synd_icons()
-
-	if(uplinklocker)
-		var/obj/structure/closet/C = new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
-		spawn(10) //gives time for the contents to spawn properly
-			for(var/obj/item/thing in C)
-				if(thing.hidden_uplink)
-					nuclear_uplink = thing
-					break
-	if(nuke_spawn)
-		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
-		the_bomb.r_code = nuke_code
 
 	return ..()
 
