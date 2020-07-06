@@ -36,26 +36,32 @@
 /datum/game_mode/nostromo/assign_outsider_antag_roles()
 	if(!..())
 		return FALSE
-	var/agent_number = 0
+	var/antag_number = 0
 
 	//Antag number should scale to active crew.
 	var/n_players = num_players()
-	agent_number = CLAMP((n_players/5), required_enemies, recommended_enemies)
+	antag_number = CLAMP((n_players/5), required_enemies, recommended_enemies)
 
-	if(antag_candidates.len < agent_number)
-		agent_number = antag_candidates.len
+	if(antag_candidates.len < antag_number)
+		antag_number = antag_candidates.len
 
-	while(agent_number > 0)
+	while(antag_number > 1)
 		var/datum/mind/new_syndicate = pick(antag_candidates)
 		syndicates += new_syndicate
 		antag_candidates -= new_syndicate //So it doesn't pick the same guy each time.
-		agent_number--
+		antag_number--
 
 	for(var/datum/mind/synd_mind in syndicates)
 		synd_mind.assigned_role = "MODE" //So they aren't chosen for other jobs.
-		synd_mind.special_role = "Syndicate"//So they actually have a special role/N
+		synd_mind.special_role = "Merchant"//So they actually have a special role/N
 	//	log_game("[synd_mind.key] with age [synd_mind.current.client.player_age] has been selected as a nuclear operative")
 	//	message_admins("[synd_mind.key] with age [synd_mind.current.client.player_age] has been selected as a nuclear operative",0,1)
+
+	var/datum/mind/new_xeno = pick(antag_candidates)
+	new_xeno.assigned_role = "MODE"
+	new_xeno.special_role = "Xenomorph"
+	antag_number--
+
 	return TRUE
 
 /datum/game_mode/nostromo/pre_setup()
@@ -140,54 +146,6 @@
 		completion_text += "<span style='font-color: red; font-weight: bold;'>Syndicate Major Victory!</span>"
 		completion_text += "<br><b>Gorlex Maradeurs operatives have destroyed [station_name()]!</b>"
 		score["roleswon"]++
-
-	else if (!disk_rescued &&  station_was_nuked &&           syndies_didnt_escape)
-		mode_result = "halfwin - syndicate nuke - did not evacuate in time"
-		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Total Annihilation</span>"
-		completion_text += "<br><b>Gorlex Maradeurs operatives destroyed [station_name()] but did not leave the area in time and got caught in the explosion.</b> Next time, don't lose the disk!"
-
-	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station && !syndies_didnt_escape)
-		mode_result = "halfwin - blew wrong station"
-		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Crew Minor Victory</span>"
-		completion_text += "<br><b>Gorlex Maradeurs operatives secured the authentication disk but blew up something that wasn't [station_name()].</b> Next time, don't lose the disk!"
-
-	else if (!disk_rescued && !station_was_nuked &&  nuke_off_station &&  syndies_didnt_escape)
-		mode_result = "halfwin - blew wrong station - did not evacuate in time"
-		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Gorlex Maradeurs span earned Darwin Award!</span>"
-		completion_text += "<br><b>Gorlex Maradeurs operatives blew up something that wasn't [station_name()] and got caught in the explosion.</b> Next time, don't lose the disk!"
-
-	else if ( disk_rescued                                         && is_operatives_are_dead())
-		mode_result = "loss - evacuation - disk secured - syndi team dead"
-		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Crew Major Victory!</span>"
-		completion_text += "<br><b>The Research Staff has saved the disc and killed the Gorlex Maradeurs Operatives</b>"
-
-	else if ( disk_rescued                                        )
-		mode_result = "loss - evacuation - disk secured"
-		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Crew Major Victory</span>"
-		completion_text += "<br><b>The Research Staff has saved the disc and stopped the Gorlex Maradeurs Operatives!</b>"
-
-	else if (!disk_rescued                                         && is_operatives_are_dead())
-		mode_result = "loss - evacuation - disk not secured"
-		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Syndicate Minor Victory!</span>"
-		completion_text += "<br><b>The Research Staff failed to secure the authentication disk but did manage to kill most of the Gorlex Maradeurs Operatives!</b>"
-
-	else if (!disk_rescued                                         &&  crew_evacuated)
-		mode_result = "halfwin - detonation averted"
-		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Syndicate Minor Victory!</span>"
-		completion_text += "<br><b>Gorlex Maradeurs operatives recovered the abandoned authentication disk but detonation of [station_name()] was averted.</b> Next time, don't lose the disk!"
-
-	else if (!disk_rescued                                         && !crew_evacuated)
-		mode_result = "halfwin - interrupted"
-		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Neutral Victory</span>"
-		completion_text += "<br><b>Round was mysteriously interrupted!</b>"
 
 	..()
 	return 1
