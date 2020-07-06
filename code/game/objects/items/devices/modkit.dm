@@ -347,3 +347,49 @@
 /obj/item/device/modkit/wizard/vox
 	name = "Vox magical hardsuit modification kit"
 	target_species = VOX
+
+//
+
+/obj/item/device/modkit/wizard/vulpkanin
+	name = "Vulpkanin magical hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/vulpkanin
+	name = "Vulpkanin hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/engineering/vulpkanin
+	name = "Vulpkanin engineering hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/engineering/chief/vulpkanin
+	name = "Vulpkanin chief-engineers hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/atmos/vulpkanin
+	name = "Vulpkanin atmospherics hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/med/vulpkanin
+	name = "Vulpkanin medical hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/med/cmo/vulpkanin
+	name = "Vulpkanin CMO hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/sec/vulpkanin
+	name = "Vulpkanin security hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/sec/hos/vulpkanin
+	name = "Vulpkanin HoS hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/mining/vulpkanin
+	name = "Vulpkanin mining hardsuit modification kit"
+	target_species = VULPKANIN
+
+/obj/item/device/modkit/syndie/vulpkanin
+	name = "Vulpkanin gorlex hardsuit modification kit"
+	target_species = VULPKANIN
