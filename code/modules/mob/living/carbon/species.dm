@@ -1281,3 +1281,43 @@
 
 /datum/species/slime/call_digest_proc(mob/living/M, datum/reagent/R)
 	return R.on_slime_digest(M)
+
+/datum/species/vulpkanin
+	name = "Vulpkanin"
+	icobase = 'icons/mob/human_races/r_vulpkanin.dmi'
+	deform = 'icons/mob/human_races/r_vulpkanin.dmi'
+	language = "Canilunzt"
+	tail = "vulptail"
+	unarmed_type = /datum/unarmed_attack/claws
+
+	dietflags = DIET_OMNI
+	metabolism_mod = METABOLISM_FACTOR
+	taste_sensitivity = TASTE_SENSITIVITY_SHARP
+
+	flesh_color = "#966464"
+	base_color = "#CF4D2F"
+
+	flags = list(
+	 IS_WHITELISTED = TRUE
+	,HAS_SKIN_TONE = TRUE
+	,HAS_LIPS = TRUE
+	,HAS_UNDERWEAR = TRUE
+	,FACEHUGGABLE = TRUE
+	,HAS_TAIL = TRUE
+	,HAS_SKIN_COLOR = TRUE
+	,HAS_HAIR = TRUE
+	,HAS_HAIR_COLOR = TRUE
+	)
+
+	has_organ = list(
+		O_HEART =    /obj/item/organ/internal/heart/vulpkanin,
+		O_LUNGS =    /obj/item/organ/internal/lungs/vulpkanin,
+		O_LIVER =    /obj/item/organ/internal/liver/vulpkanin,
+		O_KIDNEYS =  /obj/item/organ/internal/kidneys/vulpkanin,
+		O_BRAIN =    /obj/item/organ/internal/brain/vulpkanin,
+		O_EYES =     /obj/item/organ/internal/eyes/vulpkanin /*Most Vulpkanin see in full colour as a result of genetic augmentation, although it cost them their darksight (darksight = 2)
+															   unless they choose otherwise by selecting the colourblind disability in character creation (darksight = 8 but colourblind).*/
+		)
+
+/datum/species/vulpkanin/call_digest_proc(mob/living/M, datum/reagent/R)
+	return R.on_skrell_digest(M)

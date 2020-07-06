@@ -408,3 +408,23 @@
 		owner.eye_blurry = 20
 	if(is_broken())
 		owner.eye_blind = 20
+
+//VULPKANIN
+
+/obj/item/organ/internal/liver/vulpkanin
+	name = "vulpkanin liver"
+
+/obj/item/organ/internal/eyes/vulpkanin
+	name = "vulpkanin eyeballs"
+
+/obj/item/organ/internal/heart/vulpkanin
+	name = "vulpkanin heart"
+
+/obj/item/organ/internal/brain/vulpkanin
+	name = "vulpkanin brain"
+
+/obj/item/organ/internal/lungs/vulpkanin
+	name = "vulpkanin lungs"
+
+/obj/item/organ/internal/kidneys/vulpkanin
+	name = "vulpkanin kidneys"
