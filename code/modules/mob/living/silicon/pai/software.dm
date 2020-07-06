@@ -1051,6 +1051,7 @@
 		remove_language("Siik'maas")
 		remove_language("Siik'tajr")
 		remove_language("Skrellian")
+		remove_language("Canilunzt")
 
 		to_chat(src, "<span class='notice'>Translator Module toggled OFF.</span>")
 
@@ -1061,6 +1062,7 @@
 		add_language("Siik'maas")
 		add_language("Siik'tajr", 0)
 		add_language("Skrellian")
+		add_language("Canilunzt")
 
 		to_chat(src, "<span class='notice'>Translator Module toggled ON.</span>")
 

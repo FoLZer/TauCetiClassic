@@ -302,6 +302,7 @@
 	R.add_language("Tradeband", 1)
 	R.add_language("Trinary", 1)
 	R.add_language("Gutter", 1)
+	R.add_language("Canilunzt", 1)
 
 /obj/item/weapon/robot_module/butler/respawn_consumable(mob/living/silicon/robot/R)
 	..()
