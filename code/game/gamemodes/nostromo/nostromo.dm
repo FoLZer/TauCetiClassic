@@ -15,9 +15,8 @@
 
 
 /datum/game_mode/nostromo/announce()
-	to_chat(world, "<B>The current game mode is - Nostromo!</B>")
-	//to_chat(world, "<B>Gorlex Maradeurs are approaching [station_name()]!</B>")
-	//to_chat(world, "A nuclear explosive was being transported by Nanotrasen to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [station_name()]. It was identified by Nanotrasen as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!")
+	to_chat(world, "<B>Текущий режим : __!</B>")
+	to_chat(world, "Внимание! На станцию вот-вот прибудут межгалактические торговцы. Кто знает, что они за собой понесут?")
 
 /datum/game_mode/nostromo/can_start()
 	if (!..())
@@ -87,39 +86,30 @@
 			break
 
 	var/spawnpos = 1
-//	var/max_age = 0
-/*	for(var/datum/mind/synd_mind in syndicates)
-		if(isnum(synd_mind.current.client.player_age))
-			if(max_age<synd_mind.current.client.player_age)
-				max_age = synd_mind.current.client.player_age */
 
 	for(var/datum/mind/synd_mind in syndicates)
 		log_debug("Starting cycle - Ckey:[synd_mind.key] - [synd_mind]")
-		synd_mind.current.faction = "syndicate"
-		synd_mind.current.real_name = "Gorlex Maradeurs Operative" // placeholder while we get their actual name
-		log_debug("Leader status [leader_selected]")
-		if(!leader_selected)
-			log_debug("Leader - [synd_mind]")
-			synd_mind.current.loc = synd_comm_spawn
-			equip_syndicate(synd_mind.current, 1)
-			prepare_syndicate_leader(synd_mind, nuke_code)
-			leader_selected = 1
-			greet_syndicate(synd_mind, 0, 1)
-		else
-			log_debug("[synd_mind] - not a leader")
-			greet_syndicate(synd_mind)
-			equip_syndicate(synd_mind.current)
-			if(spawnpos > synd_spawn.len)
-				spawnpos = 1
-			log_debug("[synd_mind] telepoting to [synd_spawn[spawnpos]]")
-			synd_mind.current.loc = synd_spawn[spawnpos]
+		synd_mind.current.faction = "merchants"
+		synd_mind.current.real_name = "Merchant" // placeholder while we get their actual name
+		log_debug("[synd_mind] - merchant")
+		greet_merchant(synd_mind)
+		equip_syndicate(synd_mind.current)
+		if(spawnpos > synd_spawn.len)
+			spawnpos = 1
+		log_debug("[synd_mind] telepoting to [synd_spawn[spawnpos]]")
+		synd_mind.current.loc = synd_spawn[spawnpos]
 
 		spawnpos++
-		update_synd_icons_added(synd_mind)
-
-	update_all_synd_icons()
-
 	return ..()
+
+/datum/game_mode/proc/greet_merchant(datum/mind/syndicate)
+	to_chat(syndicate.current, "<span class = 'info'>You are a <font color='red'>Merchant</font>!</span>")
+	syndicate.current.playsound_local(null, 'sound/antag/ops.ogg', VOL_EFFECTS_MASTER, null, FALSE)
+	to_chat(syndicate.current, "<font color=blue>Поздравляем! По вашим заявкам, компания Weyland-Yutani согласилась взять вас на стажировку межгалактического торговца!</font>")
+	to_chat(syndicate.current, "<font color=blue>На вашей станции имеется всё возможное, что могло бы стать отличной прибылью для вас. Начиная от материалов, заканчивая нелегальными устройствами. \nВаша цель - продать как можно больше предметов, выполнить указания компании и получить контроль над станцией.</font>")
+	to_chat(syndicate.current, "<font color=blue>По окончанию смены улететь на трансфере/спасательном шаттле. (Примечание: Вам следует отыгрывать глупойкий РП. Прежде всего, \nвы - космический пират, который притворяется торговцем. В случае непонятных ситуаций или ступоров, обращайтесь в adminhelp.</font>")
+	to_chat(syndicate.current, "<font color=blue><b>Не бойтесь пользоваться помощью педалей. Удачной игры!)</b></font>")
+
 
 /datum/game_mode/nostromo/check_win()
 	if (nukes_left == 0)
