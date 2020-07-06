@@ -492,6 +492,7 @@
 #include "code\game\gamemodes\mutiny\directives\terminations_directive.dm"
 #include "code\game\gamemodes\mutiny\directives\test_directive.dm"
 #include "code\game\gamemodes\ninja\ninja.dm"
+#include "code\game\gamemodes\nostromo\nostromo.dm"
 #include "code\game\gamemodes\nuclear\nuclear.dm"
 #include "code\game\gamemodes\nuclear\nuclear_challenge.dm"
 #include "code\game\gamemodes\nuclear\nuclearbomb.dm"
