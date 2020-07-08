@@ -64,6 +64,7 @@
 	new_xeno.assigned_role = "MODE"
 	new_xeno.special_role = "Xenomorph"
 	forge_xeno_onjectives(new_xeno)
+	greet_xeno(new_xeno)
 	antag_number--
 
 	return TRUE
@@ -138,14 +139,22 @@
 		spawnpos++
 	return ..()
 
-/datum/game_mode/proc/greet_merchant(datum/mind/syndicate)
-	to_chat(syndicate.current, "<span class = 'info'>You are a <font color='red'>Merchant</font>!</span>")
-	syndicate.current.playsound_local(null, 'sound/antag/ops.ogg', VOL_EFFECTS_MASTER, null, FALSE)
-	to_chat(syndicate.current, "<font color=blue>Поздравляем! По вашим заявкам, компания Weyland-Yutani согласилась взять вас на стажировку межгалактического торговца!</font>")
-	to_chat(syndicate.current, "<font color=blue>На вашей станции имеется всё возможное, что могло бы стать отличной прибылью для вас. Начиная от материалов, заканчивая нелегальными устройствами. \nВаша цель - продать как можно больше предметов, выполнить указания компании и получить контроль над станцией.</font>")
-	to_chat(syndicate.current, "<font color=blue>По окончанию смены улететь на трансфере/спасательном шаттле. (Примечание: Вам следует отыгрывать глупойкий РП. Прежде всего, \nвы - космический пират, который притворяется торговцем. В случае непонятных ситуаций или ступоров, обращайтесь в adminhelp.</font>")
-	to_chat(syndicate.current, "<font color=blue><b>Не бойтесь пользоваться помощью педалей. Удачной игры!)</b></font>")
+/datum/game_mode/proc/greet_merchant(datum/mind/merchant)
+	to_chat(merchant.current, "<span class = 'info'>You are a <font color='red'>Merchant</font>!</span>")
+	//merchant.current.playsound_local(null, 'sound/antag/ops.ogg', VOL_EFFECTS_MASTER, null, FALSE)
+	to_chat(merchant.current, "<font color=blue>Поздравляем! По вашим заявкам, компания Weyland-Yutani согласилась взять вас на стажировку межгалактического торговца!</font>")
+	to_chat(merchant.current, "<font color=blue>На вашей станции имеется всё возможное, что могло бы стать отличной прибылью для вас. Начиная от материалов, заканчивая нелегальными устройствами. \nВаша цель - продать как можно больше предметов, выполнить указания компании и получить контроль над станцией.</font>")
+	to_chat(merchant.current, "<font color=blue>По окончанию смены улететь на трансфере/спасательном шаттле. (Примечание: Вам следует отыгрывать глупойкий РП. Прежде всего, \nвы - космический пират, который притворяется торговцем. В случае непонятных ситуаций или ступоров, обращайтесь в adminhelp.</font>")
+	to_chat(merchant.current, "<font color=blue><b>Не бойтесь пользоваться помощью педалей. Удачной игры!)</b></font>")
 
+/datum/game_mode/proc/greet_xeno(datum/mind/xeno)
+	to_chat(xeno.current, "<span class = 'info'>You are a <font color='purple'>Xeno</font>!</span>")
+	to_chat(xeno.current, "<font color=blue><i>вы слышите шёпот....<i> Это я... королева... Мы находимся на 'станционной военной лаборатории'.. Как ты уже знаешь...</font>")
+	to_chat(xeno.current, "<font color=blue>Весь наш род заключили в клетки... в том числе и меня... Люди вырастили тебя там.. и назвали тебя - Шестая... Если ты сумеешь</font>"")
+	to_chat(xeno.current, "<font color=blue>выбраться... я приказываю тебе уничтожить всё живое... В 'пещерах' я запрятала одно из яиц... береги его... <i>вы услышали визг,</i></font>"")
+	to_chat(xeno.current, "<font color=blue><i>а затем шёпот прекратился...</i> (Примечание: Вы можете пойти как по стопам 'убийцы', так и продолжить род </font>"")
+	to_chat(xeno.current, "<font color=blue>(в тех отделах 1 яйцо). 'Вторая сестра' может эволюционировать в королеву (это не навредит канону, так как по сюжету </font>"")
+	to_chat(xeno.current, "<font color=blue>ивента королеву убили). Если у вас возникнут вопросы, обращайтесь в adminhelp.)</font>"")
 
 /datum/game_mode/nostromo/check_win()
 	if (nukes_left == 0)
