@@ -13,6 +13,8 @@
 	required_enemies = 2
 	recommended_enemies = 4
 	var/num_traders = 0
+	var/list/xenomorphs = list()
+	votable = 0
 
 
 /datum/game_mode/nostromo/announce()
@@ -66,6 +68,7 @@
 	forge_xeno_onjectives(new_xeno)
 	greet_xeno(new_xeno)
 	antag_number--
+	xenomorphs.Add(new_xeno)
 
 	return TRUE
 
@@ -156,11 +159,18 @@
 	to_chat(xeno.current, "<font color=blue>(в тех отделах 1 яйцо). 'Вторая сестра' может эволюционировать в королеву (это не навредит канону, так как по сюжету </font>"")
 	to_chat(xeno.current, "<font color=blue>ивента королеву убили). Если у вас возникнут вопросы, обращайтесь в adminhelp.)</font>"")
 
-/datum/game_mode/nostromo/check_win()
-	if (nukes_left == 0)
-		return 1
-	if ()
-	return ..()
+///datum/game_mode/nostromo/check_win()
+//	if (nukes_left == 0)
+//		return 1
+//	if ()
+//	return ..()
+
+/datum/game_mode/nostromo/proc/check_xeno_victory()
+	var/success = 0
+	for(var/datum/mind/xenos in xenomorphs)
+		if(xenos.current && xenos.current.stat != DEAD)
+			success++
+	return success
 
 /datum/game_mode/nostromo/declare_completion()
 	if(config.objectives_disabled)
@@ -172,12 +182,14 @@
 			disk_rescued = 0
 			break
 	var/crew_evacuated = (SSshuttle.location==2)
-	if      (!disk_rescued &&  station_was_nuked &&          !syndies_didnt_escape)
-		mode_result = "win - syndicate nuke"
+	if(check_xeno_victory())
+		mode_result = 'win - xeno is dead'
 		feedback_set_details("round_end_result",mode_result)
-		completion_text += "<span style='font-color: red; font-weight: bold;'>Syndicate Major Victory!</span>"
-		completion_text += "<br><b>Gorlex Maradeurs operatives have destroyed [station_name()]!</b>"
-		score["roleswon"]++
+		completion_text += "<span style='font-color: green; font-weight: bold;'>Crew Major Victory!</span>"
+	else
+		mode_result = 'loose - crew is dead'
+		feedback_set_details("round_end_result",mode_result)
+		completion_text += "<span style='font-color: green; font-weight: bold;'>Xeno Major Victory!</span>"
 
 	..()
 	return 1
