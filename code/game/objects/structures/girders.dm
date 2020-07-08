@@ -136,6 +136,11 @@
 							Tsrc.ChangeTurf(/turf/simulated/wall/r_wall)
 							for(var/turf/simulated/wall/r_wall/X in Tsrc.loc)
 								X.add_hiddenprint(usr)
+							for(var/obj/item/hid_item in changed_turf)
+								if(hid_item.w_class <= ITEM_SIZE_SMALL)
+									changed_turf.hid_items += hid_item
+									//hid_item.forceMove(X)
+									hid_item.loc = get_turf(locate(20,20,20))
 							qdel(src)
 						return
 					else
