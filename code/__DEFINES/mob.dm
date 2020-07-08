@@ -87,6 +87,7 @@
 #define ZOMBIE_UNATHI  "Zombie Unathi"
 #define SLIME          "Slime"
 #define VULPKANIN      "Vulpkanin"
+#define BIONIC         "Bionic"
 
 #define HUMAN_STRIP_DELAY 40 //takes 40ds = 4s to strip someone.
 

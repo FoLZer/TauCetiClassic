@@ -428,3 +428,122 @@
 
 /obj/item/organ/internal/kidneys/vulpkanin
 	name = "vulpkanin kidneys"
+
+
+
+//BIONIC
+
+/obj/item/organ/internal/liver/bionic
+	name = "accumulator"
+
+/obj/item/organ/internal/liver/bionic/atom_init()
+	. = ..()
+	new/obj/item/weapon/stock_parts/cell/crap/(src)
+
+/obj/item/organ/internal/liver/bionic/process()
+	var/obj/item/weapon/stock_parts/cell/C = locate(/obj/item/weapon/stock_parts/cell) in src
+	if(damage && C)
+		C.charge = owner.nutrition
+		if(owner.nutrition > (C.maxcharge - damage * 5))
+			owner.nutrition = C.maxcharge - damage * 5
+	else if(!C)
+		if(!owner.is_bruised_organ(O_KIDNEYS) && prob(2))
+			to_chat(owner, "<span class='warning bold'>%ACCUMULATOR% DAMAGED BEYOND FUNCTION. SHUTTING DOWN.</span>")
+		owner.SetParalysis(5)
+		owner.eye_blurry = 5
+		owner.silent = 5
+
+/obj/item/organ/internal/eyes/bionic
+	name = "cameras"
+	robotic = 2
+
+/obj/item/organ/internal/heart/bionic
+	name = "cooling pump"
+
+	var/pumping_rate = 5
+	var/bruised_loss = 3
+
+/obj/item/organ/internal/heart/bionic/process()
+	if(is_broken())
+		return
+
+	var/obj/item/organ/internal/lungs/ipc/lungs = owner.organs_by_name[O_LUNGS]
+	if(!istype(lungs))
+		return
+
+	var/pumping_volume = pumping_rate
+	if(is_bruised())
+		pumping_volume -= bruised_loss
+
+	if(pumping_volume > 0)
+		lungs.add_refrigerant(pumping_volume)
+
+/obj/item/organ/internal/brain/bionic
+	name = "positronic brain"
+	parent_bodypart = BP_CHEST
+
+/obj/item/organ/internal/lungs/bionic
+	name = "cooling element"
+
+	var/refrigerant_max = 50
+	var/refrigerant = 50
+	var/refrigerant_rate = 5
+	var/bruised_loss = 3
+
+
+/obj/item/organ/internal/lungs/bionic/process()
+	var/temp_gain = owner.species.synth_temp_gain
+
+	if(HAS_TRAIT(owner, TRAIT_MORE_COOLANT))
+		temp_gain -= 2
+
+	if(refrigerant > 0 && !is_broken())
+		var/refrigerant_spent = refrigerant_rate
+		refrigerant -= refrigerant_rate
+		if(refrigerant < 0)
+			refrigerant_spent += refrigerant
+			refrigerant = 0
+
+		if(is_bruised())
+			refrigerant_spent -= bruised_loss
+
+		if(refrigerant_spent > 0)
+			temp_gain -= refrigerant_spent
+
+	if(HAS_TRAIT(owner, TRAIT_COOLED) & owner.bodytemperature > 290)
+		owner.bodytemperature -= 50
+
+	if(temp_gain > 0)
+		owner.bodytemperature += temp_gain
+		if(owner.bodytemperature > owner.species.synth_temp_max)
+			owner.bodytemperature = owner.species.synth_temp_max
+
+/obj/item/organ/internal/lungs/bionic/proc/add_refrigerant(volume)
+	if(refrigerant < refrigerant_max)
+		refrigerant += volume
+		if(refrigerant > refrigerant_max)
+			refrigerant = refrigerant_max
+
+/obj/item/organ/internal/kidneys/bionic
+	name = "self-diagnosis unit"
+	parent_bodypart = BP_GROIN
+
+	var/next_warning = 0
+
+/obj/item/organ/internal/kidneys/bionic/process()
+	if(next_warning > world.time)
+		return
+	next_warning = world.time + 10 SECONDS
+
+	var/damage_report = ""
+	var/first = TRUE
+
+	for(var/obj/item/organ/internal/IO in owner.organs)
+		if(IO.is_bruised())
+			if(!first)
+				damage_report += "\n"
+			first = FALSE
+			damage_report += "<span class='warning'><b>%[uppertext_(IO.name)]%</b> INJURY DETECTED. CEASE DAMAGE TO <b>%[uppertext_(IO.name)]%</b>. REQUEST ASSISTANCE.</span>"
+
+	if(damage_report != "")
+		to_chat(owner, damage_report)

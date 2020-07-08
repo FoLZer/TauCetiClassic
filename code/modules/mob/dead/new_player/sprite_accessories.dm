@@ -48,7 +48,7 @@
 /datum/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = "bald"
-	species_allowed = list(HUMAN , UNATHI , DIONA, VULPKANIN)
+	species_allowed = list(HUMAN , UNATHI , DIONA, VULPKANIN, BIONIC)
 
 /datum/sprite_accessory/hair/short
 	name = "Short Hair"	  // try to capatilize the names please~
@@ -864,7 +864,7 @@
 	name = "Shaved"
 	icon_state = "bald"
 	gender = NEUTER
-	species_allowed = list(HUMAN , UNATHI , TAJARAN , SKRELL , VOX , IPC, DIONA)
+	species_allowed = list(HUMAN , UNATHI , TAJARAN , SKRELL , VOX , IPC, DIONA, BIONIC)
 
 /datum/sprite_accessory/facial_hair/watson
 	name = "Watson Mustache"
@@ -970,6 +970,7 @@
 /  =---------------------------=  /
 ///////////////////////////////////
 */
+
 /datum/sprite_accessory/hair/ipc_screen_off
 	name = "IPC off screen"
 	icon_state = "ipc_off"

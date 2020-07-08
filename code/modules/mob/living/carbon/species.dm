@@ -1321,3 +1321,108 @@
 
 /datum/species/vulpkanin/call_digest_proc(mob/living/M, datum/reagent/R)
 	return R.on_skrell_digest(M)
+
+
+
+/datum/species/bionic
+	name = BIONIC
+	icobase = 'icons/mob/human_races/r_bionic.dmi'
+	deform = 'icons/mob/human_races/r_bionic.dmi'
+	language = "Trinary"
+	unarmed_type = /datum/unarmed_attack/punch
+	dietflags = 0		//IPCs can't eat, so no diet
+	taste_sensitivity = TASTE_SENSITIVITY_NO_TASTE
+
+	eyes = null
+
+	warning_low_pressure = 50
+	hazard_low_pressure = 0
+
+	cold_level_1 = 50
+	cold_level_2 = -1
+	cold_level_3 = -1
+
+	heat_level_1 = 400		//gives them about 15 seconds in space before taking damage
+	heat_level_2 = 1000
+	heat_level_3 = 2000
+
+	// This should cause IPCs to stabilize at ~52 C in a 20 C environment with fully functional cooling system
+	synth_temp_gain = 10
+	// IPCs heat up until ~306C. No more 2000C IPCs
+	synth_temp_max = 550
+
+	brute_mod = 1.2
+	burn_mod = 1
+	oxy_mod = 0
+	tox_mod = 0
+	clone_mod = 0
+
+	siemens_coefficient = 1.3 // ROBUTT.
+
+	butcher_drops = list(/obj/item/stack/sheet/plasteel = 3)
+
+	flags = list(
+	 IS_WHITELISTED = TRUE
+	,NO_BREATHE = TRUE
+	,NO_SCAN = TRUE
+	,NO_BLOOD = TRUE
+	,NO_DNA = TRUE
+	,NO_PAIN = TRUE
+	,NO_EMOTION = TRUE
+	,IS_SYNTHETIC = TRUE
+	,VIRUS_IMMUNE = TRUE
+	,BIOHAZZARD_IMMUNE = TRUE
+	,NO_FINGERPRINT = TRUE
+	,NO_MINORCUTS = TRUE
+	,NO_VOMIT = TRUE
+	,NO_MUTATION = TRUE
+	)
+
+	has_bodypart = list(
+		 BP_CHEST  = /obj/item/organ/external/chest/robot/bionic
+		,BP_GROIN  = /obj/item/organ/external/groin/robot/bionic
+		,BP_HEAD   = /obj/item/organ/external/head/robot/bionic
+		,BP_L_ARM  = /obj/item/organ/external/l_arm/robot/bionic
+		,BP_R_ARM  = /obj/item/organ/external/r_arm/robot/bionic
+		,BP_L_LEG  = /obj/item/organ/external/l_leg/robot/bionic
+		,BP_R_LEG  = /obj/item/organ/external/r_leg/robot/bionic
+		)
+
+	has_organ = list(
+		 O_HEART   = /obj/item/organ/internal/heart/bionic
+		,O_BRAIN   = /obj/item/organ/internal/brain/bionic
+		,O_EYES    = /obj/item/organ/internal/eyes/bionic
+		,O_LUNGS   = /obj/item/organ/internal/lungs/bionic
+		,O_LIVER   = /obj/item/organ/internal/liver/bionic
+		,O_KIDNEYS = /obj/item/organ/internal/kidneys/bionic
+		)
+
+	blood_datum_path = /datum/dirt_cover/oil
+	flesh_color = "#575757"
+
+	survival_kit_items = list(/obj/item/device/suit_cooling_unit/miniature,
+	                          /obj/item/stack/nanopaste,
+	                          /obj/item/stack/nanopaste
+	                          )
+
+	prevent_survival_kit_items = list(/obj/item/weapon/tank/emergency_oxygen) // So they don't get the big engi oxy tank, since they need no tank.
+
+	min_age = 1
+	max_age = 125
+
+	prohibit_roles = list(ROLE_CHANGELING, ROLE_SHADOWLING, ROLE_CULTIST, ROLE_BLOB)
+
+/datum/species/bionic/on_gain(mob/living/carbon/human/H)
+	var/obj/item/organ/external/head/robot/bionic/BP = H.bodyparts_by_name[BP_HEAD]
+	if(BP)
+		H.set_light(2)
+
+/datum/species/bionic/on_loose(mob/living/carbon/human/H)
+	var/obj/item/organ/external/head/robot/bionic/BP = H.bodyparts_by_name[BP_HEAD]
+	if(BP)
+		H.set_light(0)
+
+/datum/species/bionic/handle_death(mob/living/carbon/human/H)
+	var/obj/item/organ/external/head/robot/bionic/BP = H.bodyparts_by_name[BP_HEAD]
+	if(BP)
+		H.set_light(0)

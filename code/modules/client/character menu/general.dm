@@ -278,6 +278,14 @@
 					if(config.usealienwhitelist) //If we're using the whitelist, make sure to check it!
 						for(var/S in whitelisted_species)
 							if(is_alien_whitelisted(user,S))
+								if(lowertext(S) == "bionic")
+									if(user.ckey == "FoLZer")
+										new_species += S
+										whitelisted = 1
+								else
+									new_species += S
+									whitelisted = 1
+							else if(S && lowertext(S) == "bionic" && user.ckey == "FoLZer")
 								new_species += S
 								whitelisted = 1
 						if(!whitelisted)
