@@ -13,7 +13,7 @@
 	required_enemies = 2
 	recommended_enemies = 4
 	var/num_traders = 0
-	var/list/xenomorphs = list()
+	var/list/xenoss = list()
 	votable = 0
 
 
@@ -65,13 +65,13 @@
 	var/datum/mind/new_xeno = pick(antag_candidates)
 	new_xeno.assigned_role = "MODE"
 	new_xeno.special_role = "Xenomorph"
-	forge_xeno_onjectives(new_xeno)
+	forge_xeno_objectives(new_xeno)
 	antag_number--
-	xenomorphs.Add(new_xeno)
+	xenoss.Add(new_xeno)
 
 	return TRUE
 
-/datum/game_mode/proc/forge_merhant_objectives(datum/mind/merhant)
+/datum/game_mode/nostromo/proc/forge_merchant_objectives(datum/mind/merhant)
 	var/datum/objective/harm/harm = new
 	harm.owner = merhant
 	merhant.objectives += harm
@@ -80,7 +80,7 @@
 	steal.owner = merhant
 	merhant.objectives += steal
 
-/datum/game_mode/proc/forge_xeno_objectives(datum/mind/xeno)
+/datum/game_mode/nostromo/proc/forge_xeno_objectives(datum/mind/xeno)
 	var/datum/objective/nostromo/xeno/kill/kill = new
 	kill.owner = xeno
 	xeno.objectives += kill
@@ -142,12 +142,12 @@
 
 	for(var/datum/mind/xeno in xenomorphs)
 		log_debug("Starting cycle - Ckey:[xeno.key] - [xeno]")
-		synd_mind.current.faction = "xenomorphs"
-		synd_mind.current.real_name = "Xenomorph"
+		xeno.current.faction = "xenomorphs"
+		xeno.current.real_name = "Xenomorph"
 		log_debug("[xeno] - xenomorph")
 		greet_xeno(xeno)
 
-		var/mob/living/carbon/xenomorph/humanoid/hunter/H = new /mob/living/carbon/xenomorph/facehugger(start_point)
+		var/mob/living/carbon/xenomorph/humanoid/hunter/H = new /mob/living/carbon/xenomorph/facehugger(xeno_spawn)
 		var/mob/original = xeno.current
 
 		xeno.transfer_to(H)
@@ -156,7 +156,7 @@
 		qdel(original)
 	return ..()
 
-/datum/game_mode/proc/greet_merchant(datum/mind/merchant)
+/datum/game_mode/nostromo/proc/greet_merchant(datum/mind/merchant)
 	to_chat(merchant.current, "<span class = 'info'>You are a <font color='red'>Merchant</font>!</span>")
 	//merchant.current.playsound_local(null, 'sound/antag/ops.ogg', VOL_EFFECTS_MASTER, null, FALSE)
 	to_chat(merchant.current, "<font color=blue>Поздравляем! По вашим заявкам, компания Weyland-Yutani согласилась взять вас на стажировку межгалактического торговца!</font>")
@@ -164,14 +164,14 @@
 	to_chat(merchant.current, "<font color=blue>По окончанию смены улететь на трансфере/спасательном шаттле. (Примечание: Вам следует отыгрывать глупойкий РП. Прежде всего, \nвы - космический пират, который притворяется торговцем. В случае непонятных ситуаций или ступоров, обращайтесь в adminhelp.</font>")
 	to_chat(merchant.current, "<font color=blue><b>Не бойтесь пользоваться помощью педалей. Удачной игры!)</b></font>")
 
-/datum/game_mode/proc/greet_xeno(datum/mind/xeno)
+/datum/game_mode/nostromo/proc/greet_xeno(datum/mind/xeno)
 	to_chat(xeno.current, "<span class = 'info'>You are a <font color='purple'>Xeno</font>!</span>")
 	to_chat(xeno.current, "<font color=blue><i>вы слышите шёпот....<i> Это я... королева... Мы находимся на 'станционной военной лаборатории'.. Как ты уже знаешь...</font>")
-	to_chat(xeno.current, "<font color=blue>Весь наш род заключили в клетки... в том числе и меня... Люди вырастили тебя там.. и назвали тебя - Шестая... Если ты сумеешь</font>"")
-	to_chat(xeno.current, "<font color=blue>выбраться... я приказываю тебе уничтожить всё живое... В 'пещерах' я запрятала одно из яиц... береги его... <i>вы услышали визг,</i></font>"")
-	to_chat(xeno.current, "<font color=blue><i>а затем шёпот прекратился...</i> (Примечание: Вы можете пойти как по стопам 'убийцы', так и продолжить род </font>"")
-	to_chat(xeno.current, "<font color=blue>(в тех отделах 1 яйцо). 'Вторая сестра' может эволюционировать в королеву (это не навредит канону, так как по сюжету </font>"")
-	to_chat(xeno.current, "<font color=blue>ивента королеву убили). Если у вас возникнут вопросы, обращайтесь в adminhelp.)</font>"")
+	to_chat(xeno.current, "<font color=blue>Весь наш род заключили в клетки... в том числе и меня... Люди вырастили тебя там.. и назвали тебя - Шестая... Если ты сумеешь</font>")
+	to_chat(xeno.current, "<font color=blue>выбраться... я приказываю тебе уничтожить всё живое... В 'пещерах' я запрятала одно из яиц... береги его... <i>вы услышали визг,</i></font>")
+	to_chat(xeno.current, "<font color=blue><i>а затем шёпот прекратился...</i> (Примечание: Вы можете пойти как по стопам 'убийцы', так и продолжить род </font>")
+	to_chat(xeno.current, "<font color=blue>(в тех отделах 1 яйцо). 'Вторая сестра' может эволюционировать в королеву (это не навредит канону, так как по сюжету </font>")
+	to_chat(xeno.current, "<font color=blue>ивента королеву убили). Если у вас возникнут вопросы, обращайтесь в adminhelp.)</font>")
 
 ///datum/game_mode/nostromo/check_win()
 //	if (nukes_left == 0)
@@ -181,27 +181,18 @@
 
 /datum/game_mode/nostromo/proc/check_xeno_victory()
 	var/success = 0
-	for(var/datum/mind/xenos in xenomorphs)
+	for(var/datum/mind/xenos in xenoss)
 		if(xenos.current && xenos.current.stat != DEAD)
 			success++
 	return success
 
 /datum/game_mode/nostromo/declare_completion()
-	if(config.objectives_disabled)
-		return
-	var/disk_rescued = 1
-	for(var/obj/item/weapon/disk/nuclear/D in poi_list)
-		var/disk_area = get_area(D)
-		if(!is_type_in_typecache(disk_area, centcom_areas_typecache))
-			disk_rescued = 0
-			break
-	var/crew_evacuated = (SSshuttle.location==2)
 	if(check_xeno_victory())
-		mode_result = 'win - xeno is dead'
+		mode_result = "win - xeno is dead"
 		feedback_set_details("round_end_result",mode_result)
 		completion_text += "<span style='font-color: green; font-weight: bold;'>Crew Major Victory!</span>"
 	else
-		mode_result = 'loose - crew is dead'
+		mode_result = "loose - crew is dead"
 		feedback_set_details("round_end_result",mode_result)
 		completion_text += "<span style='font-color: green; font-weight: bold;'>Xeno Major Victory!</span>"
 
