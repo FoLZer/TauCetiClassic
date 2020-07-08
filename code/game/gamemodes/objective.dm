@@ -981,3 +981,15 @@ var/global/vox_kills = 0 //Used to check the Inviolate.
 	if(vox_kills > MAX_VOX_KILLS)
 		return OBJECTIVE_LOSS
 	return OBJECTIVE_WIN
+
+/datum/objective/nostromo/xeno/kill
+	explanation_text = "Kill everyone on the ship."
+
+/datum/objective/nostromo/xeno/infest
+	explanation_text = "Infest someone with facehugger."
+
+/datum/objective/nostromo/xeno/breakout
+	explanation_text = "Breakout from the jail."
+
+/datum/objective/nostromo/xeno/leave
+	explanation_text = "Escape on the shuttle to infest even more people."

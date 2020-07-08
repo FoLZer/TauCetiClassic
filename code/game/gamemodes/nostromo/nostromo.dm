@@ -12,6 +12,7 @@
 	required_players_secret = 10
 	required_enemies = 2
 	recommended_enemies = 4
+	var/num_traders = 0
 
 
 /datum/game_mode/nostromo/announce()
@@ -50,19 +51,48 @@
 		syndicates += new_syndicate
 		antag_candidates -= new_syndicate //So it doesn't pick the same guy each time.
 		antag_number--
+		num_traders++
 
 	for(var/datum/mind/synd_mind in syndicates)
 		synd_mind.assigned_role = "MODE" //So they aren't chosen for other jobs.
 		synd_mind.special_role = "Merchant"//So they actually have a special role/N
 	//	log_game("[synd_mind.key] with age [synd_mind.current.client.player_age] has been selected as a nuclear operative")
 	//	message_admins("[synd_mind.key] with age [synd_mind.current.client.player_age] has been selected as a nuclear operative",0,1)
+		forge_merchant_objectives(synd_mind)
 
 	var/datum/mind/new_xeno = pick(antag_candidates)
 	new_xeno.assigned_role = "MODE"
 	new_xeno.special_role = "Xenomorph"
+	forge_xeno_onjectives(new_xeno)
 	antag_number--
 
 	return TRUE
+
+/datum/game_mode/proc/forge_merhant_objectives(datum/mind/merhant)
+	var/datum/objective/harm/harm = new
+	harm.owner = merhant
+	merhant.objectives += harm
+
+	var/datum/objective/steal/steal = new
+	steal.owner = merhant
+	merhant.objectives += steal
+
+/datum/game_mode/proc/forge_xeno_objectives(datum/mind/xeno)
+	var/datum/objective/nostromo/xeno/kill/kill = new
+	kill.owner = xeno
+	xeno.objectives += kill
+
+	var/datum/objective/nostromo/xeno/infest/infest = new
+	infest.owner = xeno
+	xeno.objectives += infest
+
+	var/datum/objective/nostromo/xeno/breakout/breakout = new
+	breakout.owner = xeno
+	xeno.objectives += breakout
+
+	var/datum/objective/nostromo/xeno/leave/leave = new
+	leave.owner = xeno
+	xeno.objectives += leave
 
 /datum/game_mode/nostromo/pre_setup()
 	return 1
@@ -120,6 +150,7 @@
 /datum/game_mode/nostromo/check_win()
 	if (nukes_left == 0)
 		return 1
+	if ()
 	return ..()
 
 /datum/game_mode/nostromo/declare_completion()
@@ -132,14 +163,6 @@
 			disk_rescued = 0
 			break
 	var/crew_evacuated = (SSshuttle.location==2)
-	//var/operatives_are_dead = is_operatives_are_dead()
-
-
-	//nukes_left
-	//station_was_nuked
-	//derp //Used for tracking if the syndies actually haul the nuke to the station	//no
-	//herp //Used for tracking if the syndies got the shuttle off of the z-level	//NO, DON'T FUCKING NAME VARS LIKE THIS
-
 	if      (!disk_rescued &&  station_was_nuked &&          !syndies_didnt_escape)
 		mode_result = "win - syndicate nuke"
 		feedback_set_details("round_end_result",mode_result)
