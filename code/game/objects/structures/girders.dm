@@ -106,9 +106,15 @@
 					if(S.use_tool(src, user, 40, amount = 2, volume = 100))
 						to_chat(user, "<span class='notice'>You added the plating!</span>")
 						var/turf/Tsrc = get_turf(src)
-						Tsrc.ChangeTurf(/turf/simulated/wall)
+						var/turf/simulated/wall/changed_turf = Tsrc.ChangeTurf(/turf/simulated/wall)
 						for(var/turf/simulated/wall/X in Tsrc.loc)
 							X.add_hiddenprint(usr)
+						//for(var/turf/simulated/wall/X in src.loc)
+						//for(var/obj/item/hid_item in changed_turf)
+						for(var/obj/item/hid_item in changed_turf)
+							if(hid_item.w_class <= ITEM_SIZE_SMALL)
+								changed_turf.hid_items += hid_item
+								hid_item.loc = get_turf(locate(20,20,20))
 						qdel(src)
 					return
 
@@ -158,9 +164,15 @@
 				if(S.use_tool(src, user, 40, amount = 2, volume = 100))
 					to_chat(user, "<span class='notice'>You added the plating!</span>")
 					var/turf/Tsrc = get_turf(src)
-					Tsrc.ChangeTurf(text2path("/turf/simulated/wall/mineral/[M]"))
+					var/turf/simulated/wall/mineral/changed_turf = Tsrc.ChangeTurf(text2path("/turf/simulated/wall/mineral/[M]"))
 					for(var/turf/simulated/wall/mineral/X in Tsrc.loc)
 						X.add_hiddenprint(usr)
+					//for(var/turf/simulated/wall/mineral/X in src.loc)
+					for(var/obj/item/hid_item in changed_turf)
+						if(hid_item.w_class <= ITEM_SIZE_SMALL)
+							changed_turf.hid_items += hid_item
+							//hid_item.forceMove(X)
+							hid_item.loc = get_turf(locate(20,20,20))
 					qdel(src)
 				return
 
@@ -173,7 +185,11 @@
 			P.loc = src.loc
 			to_chat(user, "<span class='notice'>You fit the pipe into the [src]!</span>")
 	else
-		..()
+		if(W.w_class <= ITEM_SIZE_SMALL)
+			user.drop_item(src.loc)
+		else
+			to_chat(user, "<span class='notice'>It doesn't fit there!</span>")
+			..()
 
 
 /obj/structure/girder/blob_act()

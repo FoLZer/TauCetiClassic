@@ -5,6 +5,8 @@
 	icon_state = "box"
 	plane = GAME_PLANE
 
+	var/list/hid_items = list()
+
 	var/mineral = "metal"
 	var/rotting = 0
 
@@ -151,6 +153,9 @@
 	return ..()
 
 /turf/simulated/wall/proc/dismantle_wall(devastated=0, explode=0)
+	for(var/obj/item/I in hid_items)
+		I.loc = src
+
 	if(devastated)
 		devastate_wall()
 	else
