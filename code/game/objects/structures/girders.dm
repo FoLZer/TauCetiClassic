@@ -133,7 +133,7 @@
 						if(S.use_tool(src, user, 50, amount = 1, volume = 100))
 							to_chat(user, "<span class='notice'>Wall fully reinforced!</span>")
 							var/turf/Tsrc = get_turf(src)
-							Tsrc.ChangeTurf(/turf/simulated/wall/r_wall)
+							var/turf/simulated/wall/r_wall/changed_turf = Tsrc.ChangeTurf(/turf/simulated/wall/r_wall)
 							for(var/turf/simulated/wall/r_wall/X in Tsrc.loc)
 								X.add_hiddenprint(usr)
 							for(var/obj/item/hid_item in changed_turf)
