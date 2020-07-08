@@ -111,10 +111,13 @@
 			. += " Style: <a href='?_src_=prefs;preference=f_style;task=input'>[f_style]</a><br>"
 			. += "<b>Eyes</b>"
 			. += "<br><a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> [color_square(r_eyes, g_eyes, b_eyes)]<br>"
-			
+
 			if(specie_obj.flags[HAS_SKIN_COLOR])
 				. += "<b>Body Color</b>"
 				. += "<br><a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> [color_square(r_skin, g_skin, b_skin)]"
+			if(species == VULPKANIN)
+				. += "<br><b>Nose Color</b>"
+				. += "<br><a href='?_src_=prefs;preference=nose;task=input'>Change Color</a> [color_square(r_nose, g_nose, b_nose)]"
 
 		//Gear
 		if("gear")
@@ -213,6 +216,10 @@
 					r_hair = rand(0,255)
 					g_hair = rand(0,255)
 					b_hair = rand(0,255)
+				if("nose")
+					r_nose = rand(0,255)
+					g_nose = rand(0,255)
+					b_nose = rand(0,255)
 				if("h_style")
 					if(species == IPC)
 						h_style = random_ipc_monitor(ipc_head)
@@ -328,6 +335,13 @@
 						r_grad = hex2num(copytext(new_grad, 2, 4))
 						g_grad = hex2num(copytext(new_grad, 4, 6))
 						b_grad = hex2num(copytext(new_grad, 6, 8))
+
+				if("nose")
+					var/new_nose = input(user, "Choose your character's nose color:", "Character Preference") as color|null
+					if(new_nose)
+						r_nose = hex2num(copytext(new_nose, 2, 4))
+						g_nose = hex2num(copytext(new_nose, 4, 6))
+						b_nose = hex2num(copytext(new_nose, 6, 8))
 
 				if("h_style")
 					var/list/valid_hairstyles = list()

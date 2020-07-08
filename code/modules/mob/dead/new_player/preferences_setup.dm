@@ -15,6 +15,7 @@
 	randomize_hair_color("hair")
 	randomize_hair_color("facial")
 	randomize_hair_color("gradient")
+	randomize_hair_color("nose")
 	randomize_eyes_color()
 	randomize_skin_color()
 	underwear = rand(1,underwear_m.len)
@@ -91,6 +92,10 @@
 			r_grad = red
 			g_grad = green
 			b_grad = blue
+		if("nose")
+			r_nose = red
+			g_nose = green
+			b_nose = blue
 
 /datum/preferences/proc/randomize_eyes_color()
 	var/red

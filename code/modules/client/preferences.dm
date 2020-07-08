@@ -83,6 +83,9 @@ var/const/MAX_SAVE_SLOTS = 10
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
+	var/r_nose = 0						//Nose color
+	var/g_nose = 0						//Nose color
+	var/b_nose = 0						//Nose color
 	var/species = HUMAN
 	var/language = "None"				//Secondary language
 
@@ -326,6 +329,10 @@ var/const/MAX_SAVE_SLOTS = 10
 	character.r_hair = r_hair
 	character.g_hair = g_hair
 	character.b_hair = b_hair
+
+	character.r_nose = r_nose
+	character.g_nose = g_nose
+	character.b_nose = b_nose
 
 	character.r_grad = r_grad
 	character.g_grad = g_grad

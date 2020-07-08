@@ -234,6 +234,11 @@ Please contact me on #coderbus IRC. ~Carn x
 
 		standing += BP.get_icon(BODY_LAYER)
 
+	if(species.name == VULPKANIN && bodyparts_by_name[BP_HEAD])
+		var/icon/nose = new/icon("icon" = "icons/mob/human_face.dmi", "icon_state" = "nose")
+		nose.Blend(rgb(r_nose,g_nose,b_nose),ICON_AND)
+		standing += nose
+
 	//Underwear
 	if((underwear > 0) && (underwear < 12) && species.flags[HAS_UNDERWEAR])
 		if(!fat)

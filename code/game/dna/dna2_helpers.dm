@@ -157,6 +157,10 @@
 		H.g_eyes   = dna.GetUIValueRange(DNA_UI_EYES_G,    255)
 		H.b_eyes   = dna.GetUIValueRange(DNA_UI_EYES_B,    255)
 
+		H.r_nose   = dna.GetUIValueRange(DNA_UI_NOSE_R,    255)
+		H.g_nose   = dna.GetUIValueRange(DNA_UI_NOSE_G,    255)
+		H.b_nose   = dna.GetUIValueRange(DNA_UI_NOSE_B,    255)
+
 		H.s_tone   = 35 - dna.GetUIValueRange(DNA_UI_SKIN_TONE, 220) // Value can be negative.
 
 		if (dna.GetUIState(DNA_UI_GENDER))

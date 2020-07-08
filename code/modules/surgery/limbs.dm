@@ -190,6 +190,9 @@
 		target.r_hair = B.r_hair
 		target.g_hair = B.g_hair
 		target.b_hair = B.b_hair
+		target.r_nose = B.r_nose
+		target.g_nose = B.g_nose
+		target.b_nose = B.b_nose
 		target.update_hair()
 
 /datum/surgery_step/limb/attach/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)

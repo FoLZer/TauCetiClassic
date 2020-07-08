@@ -15,6 +15,10 @@
 	var/b_grad = 0
 	var/grad_style = "none"
 
+	var/r_nose = 0
+	var/g_nose = 0
+	var/b_nose = 0
+
 	//Facial hair colour and style
 	var/r_facial = 0
 	var/g_facial = 0

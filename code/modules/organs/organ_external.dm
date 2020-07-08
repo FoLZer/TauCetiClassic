@@ -713,6 +713,9 @@ Note that amputating the affected organ does in fact remove the infection from t
 	var/r_hair
 	var/g_hair
 	var/b_hair
+	var/r_nose
+	var/g_nose
+	var/b_nose
 
 /obj/item/organ/external/head/atom_init()
 	. = ..()
@@ -736,6 +739,14 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	cut_overlays()
 	//Add (facial) hair.
+	if(owner.species.name == VULPKANIN)
+		var/mutable_appearance/nose = mutable_appearance("icons/mob/human_races/r_vulpkanin.dmi","nose")
+		r_nose = owner.r_nose
+		g_nose = owner.g_nose
+		b_nose = owner.b_nose
+		nose.color = RGB_CONTRAST(owner.r_nose, owner.g_nose, owner.b_nose)
+
+		add_overlay(nose)
 	if(owner.f_style)
 		var/datum/sprite_accessory/facial_hair_style = facial_hair_styles_list[owner.f_style]
 		if(facial_hair_style)
