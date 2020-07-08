@@ -66,7 +66,6 @@
 	new_xeno.assigned_role = "MODE"
 	new_xeno.special_role = "Xenomorph"
 	forge_xeno_onjectives(new_xeno)
-	greet_xeno(new_xeno)
 	antag_number--
 	xenomorphs.Add(new_xeno)
 
@@ -140,6 +139,21 @@
 		synd_mind.current.loc = synd_spawn[spawnpos]
 
 		spawnpos++
+
+	for(var/datum/mind/xeno in xenomorphs)
+		log_debug("Starting cycle - Ckey:[xeno.key] - [xeno]")
+		synd_mind.current.faction = "xenomorphs"
+		synd_mind.current.real_name = "Xenomorph"
+		log_debug("[xeno] - xenomorph")
+		greet_xeno(xeno)
+
+		var/mob/living/carbon/xenomorph/humanoid/hunter/H = new /mob/living/carbon/xenomorph/facehugger(start_point)
+		var/mob/original = xeno.current
+
+		xeno.transfer_to(H)
+
+		greet_xeno(xeno)
+		qdel(original)
 	return ..()
 
 /datum/game_mode/proc/greet_merchant(datum/mind/merchant)
