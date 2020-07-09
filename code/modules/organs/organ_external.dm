@@ -727,7 +727,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return ..()
 
 /obj/item/organ/external/head/is_compatible(mob/living/carbon/human/H)
-	if(H.species.name == IPC || H.species.name == DIONA)
+	if(H.species.name == IPC || H.species.name == DIONA || H.species.name == BIONIC)
 		return FALSE
 
 	return TRUE
@@ -786,7 +786,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				brain_op_stage = 1
 
 			if(2)
-				if(!(species in list(DIONA, IPC)))
+				if(!(species in list(DIONA, IPC, BIONIC)))
 					for(var/mob/O in (oviewers(brainmob) - user))
 						O.show_message("<span class='warning'>[brainmob] is having \his connections to the brain delicately severed with [I] by [user].</span>", SHOWMSG_VISUAL)
 					to_chat(brainmob, "<span class='warning'>[user] begins to cut open your head with [I]!</span>")
@@ -806,7 +806,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 				brain_op_stage = 2
 			if(3)
-				if(!(species in list(DIONA, IPC)))
+				if(!(species in list(DIONA, IPC, BIONIC)))
 					for(var/mob/O in (oviewers(brainmob) - user))
 						O.show_message("<span class='warning'>[brainmob] has \his spine's connection to the brain severed with [I] by [user].</span>", SHOWMSG_VISUAL)
 					to_chat(brainmob, "<span class='warning'>[user] severs your brain's connection to the spine with [I]!</span>")

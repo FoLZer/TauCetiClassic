@@ -329,7 +329,7 @@
 	reagent_state = LIQUID
 	color = "#181818" // rgb: 24, 24, 24
 	custom_metabolism = 0.005
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 	var/alert_time = 0
 
 /datum/reagent/nicotine/on_mob_life(mob/living/M)
@@ -486,7 +486,7 @@
 	var/spawning_horror = 0
 	var/percent_machine = 0
 	taste_message = "nanomachines, son"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 	data = list()
 

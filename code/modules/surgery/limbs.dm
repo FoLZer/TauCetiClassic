@@ -207,7 +207,7 @@
 
 /datum/surgery_step/ipc_limb
 	can_infect = FALSE
-	allowed_species = list(IPC)
+	allowed_species = list(IPC, BIONIC)
 
 /datum/surgery_step/ipc_limb/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!ishuman(target))

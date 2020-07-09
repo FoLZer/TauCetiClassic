@@ -26,7 +26,7 @@
 		THE VERSION THERE. CURRENTLY THE VERSION THERE IS 26.
 		~Luduk
 	*/
-	restricted_species = list(SKRELL, UNATHI, TAJARAN, DIONA, VOX, IPC)
+	restricted_species = list(SKRELL, UNATHI, TAJARAN, DIONA, VOX, IPC, BIONIC)
 
 
 /datum/job/warden
@@ -51,7 +51,7 @@
 		THE VERSION THERE. CURRENTLY THE VERSION THERE IS 26.
 		~Luduk
 	*/
-	restricted_species = list(TAJARAN, DIONA, VOX, IPC)
+	restricted_species = list(TAJARAN, DIONA, VOX, IPC, BIONIC)
 
 
 /datum/job/detective
@@ -101,7 +101,7 @@
 		THE VERSION THERE. CURRENTLY THE VERSION THERE IS 26.
 		~Luduk
 	*/
-	restricted_species = list(DIONA, TAJARAN, VOX, IPC)
+	restricted_species = list(DIONA, TAJARAN, VOX, IPC, BIONIC)
 
 
 /datum/job/forensic
@@ -151,4 +151,4 @@
 		THE VERSION THERE. CURRENTLY THE VERSION THERE IS 26.
 		~Luduk
 	*/
-	restricted_species = list(DIONA, TAJARAN, VOX, IPC)
+	restricted_species = list(DIONA, TAJARAN, VOX, IPC, BIONIC)

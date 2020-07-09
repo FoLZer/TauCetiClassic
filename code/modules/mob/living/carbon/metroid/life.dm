@@ -447,7 +447,7 @@
 				var/list/targets = list()
 
 				for(var/mob/living/L in view(7,src))
-					if(L.get_species() == IPC) //Ignore IPC
+					if(L.get_species() == IPC || L.get_species() == BIONIC) //Ignore IPC
 						continue
 
 					if(L.get_species() == SLIME || L.stat == DEAD) // Ignore other slimes and dead mobs

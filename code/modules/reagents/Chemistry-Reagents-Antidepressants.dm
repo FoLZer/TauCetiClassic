@@ -8,7 +8,7 @@
 	color = "#bf80bf"
 	custom_metabolism = 0.01
 	data = 0
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/antidepressant/methylphenidate/on_general_digest(mob/living/M)
 	..()
@@ -35,7 +35,7 @@
 	color = "#ff80ff"
 	custom_metabolism = 0.01
 	data = 0
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/antidepressant/citalopram/on_general_digest(mob/living/M)
 	..()
@@ -62,7 +62,7 @@
 	color = "#ff80bf"
 	custom_metabolism = 0.01
 	data = 0
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/antidepressant/paroxetine/on_general_digest(mob/living/M)
 	..()

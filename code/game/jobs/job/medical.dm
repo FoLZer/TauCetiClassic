@@ -42,7 +42,7 @@
 	access = list(access_medical, access_morgue, access_surgery, access_maint_tunnels, access_medbay_storage)
 	salary = 160
 	alt_titles = list(
-		"Surgeon" = /datum/outfit/job/surgeon, 
+		"Surgeon" = /datum/outfit/job/surgeon,
 		"Nurse" = /datum/outfit/job/nurse
 		)
 	minimal_player_ingame_minutes = 960
@@ -78,7 +78,7 @@
 		THE VERSION THERE. CURRENTLY THE VERSION THERE IS 26.
 		~Luduk
 	*/
-	restricted_species = list(IPC)
+	restricted_species = list(IPC, BIONIC)
 
 // Slow species shouldn't be paramedics.
 /datum/job/paramedic/special_species_check(datum/species/S)

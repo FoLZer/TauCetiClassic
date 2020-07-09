@@ -53,7 +53,7 @@
 	priority = 3
 	can_infect = 0
 	blood_level = 1
-	allowed_species = list(DIONA, IPC) // Just so you can fail on fixing IPC's groin organs.
+	allowed_species = list(DIONA, IPC, BIONIC) // Just so you can fail on fixing IPC's groin organs.
 
 /datum/surgery_step/groin_organs/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(!ishuman(target))
@@ -163,7 +163,7 @@
 	/obj/item/weapon/wrench = 70
 	)
 
-	allowed_species = list(IPC)
+	allowed_species = list(IPC, BIONIC)
 
 	min_duration = 70
 	max_duration = 90

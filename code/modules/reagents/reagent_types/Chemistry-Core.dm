@@ -298,7 +298,7 @@
 	color = "#484848" // rgb: 72, 72, 72
 	overdose = REAGENTS_OVERDOSE
 	taste_message = "druggie poison"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/mercury/on_general_digest(mob/living/M)
 	..()
@@ -397,7 +397,7 @@
 	color = "#808080" // rgb: 128, 128, 128
 	overdose = REAGENTS_OVERDOSE
 	taste_message = "happiness"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/lithium/on_general_digest(mob/living/M)
 	..()

@@ -111,7 +111,7 @@
 	color = "#c8a5dc" // rgb: 200, 165, 220
 	toxpwr = 0
 	overdose = REAGENTS_OVERDOSE
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 	flags = list()
 
 /datum/reagent/toxin/lexorin/on_general_digest(mob/living/M)
@@ -147,7 +147,7 @@
 	color = "#cf3600" // rgb: 207, 54, 0
 	toxpwr = 4
 	custom_metabolism = 0.4
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 	flags = list()
 
 /datum/reagent/toxin/cyanide/on_general_digest(mob/living/M)
@@ -195,7 +195,7 @@
 	reagent_state = SOLID
 	color = "#669900" // rgb: 102, 153, 0
 	toxpwr = 0.5
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/toxin/zombiepowder/on_general_digest(mob/living/M)
 	..()
@@ -281,7 +281,7 @@
 	toxpwr = 0
 	custom_metabolism = 0.1
 	overdose = REAGENTS_OVERDOSE
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 	flags = list()
 
 /datum/reagent/toxin/stoxin/on_general_digest(mob/living/M)
@@ -313,7 +313,7 @@
 	custom_metabolism = 0.1 //Default 0.2
 	overdose = 15
 	overdose_dam = 6
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 	flags = list()
 
 /datum/reagent/toxin/chloralhydrate/on_general_digest(mob/living/M)
@@ -377,7 +377,7 @@
 	color = "#fbbf0d" // rgb: 251, 191, 13
 	custom_metabolism = 0.15 // Sleep toxins should always be consumed pretty fast
 	overdose = REAGENTS_OVERDOSE * 0.5
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/toxin/beer2/on_general_digest(mob/living/M)
 	..()
@@ -546,7 +546,7 @@
 	color = "#792300" //rgb: 207, 54, 0
 	custom_metabolism = 0.01
 	taste_message = "DEATH"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 	data = list()
 
@@ -722,7 +722,7 @@
 	color = "#60a584" // rgb: 96, 165, 132
 	custom_metabolism = REAGENTS_METABOLISM * 0.5
 	overdose = REAGENTS_OVERDOSE
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/space_drugs/on_general_digest(mob/living/M)
 	..()
@@ -742,7 +742,7 @@
 	color = "#202040" // rgb: 20, 20, 40
 	custom_metabolism = REAGENTS_METABOLISM * 0.25
 	overdose = REAGENTS_OVERDOSE
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/serotrotium/on_general_digest(mob/living/M)
 	..()
@@ -759,7 +759,7 @@
 	overdose = REAGENTS_OVERDOSE
 	custom_metabolism = REAGENTS_METABOLISM * 0.5
 	taste_message = null
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/cryptobiolin/on_general_digest(mob/living/M)
 	..()
@@ -775,7 +775,7 @@
 	reagent_state = LIQUID
 	color = "#c8a5dc" // rgb: 200, 165, 220
 	overdose = REAGENTS_OVERDOSE
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/impedrezene/on_general_digest(mob/living/M)
 	..()

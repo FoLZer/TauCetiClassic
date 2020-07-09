@@ -67,7 +67,7 @@
 		THE VERSION THERE. CURRENTLY THE VERSION THERE IS 26.
 		~Luduk
 	*/
-	restricted_species = list(IPC)
+	restricted_species = list(IPC, BIONIC)
 
 
 /datum/job/xenobiologist

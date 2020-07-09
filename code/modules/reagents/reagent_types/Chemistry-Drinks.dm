@@ -505,7 +505,7 @@
 	reagent_state = LIQUID
 	color = "#666300" // rgb: 102, 99, 0
 	taste_message = "fruity alcohol"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/consumable/atomicbomb/on_general_digest(mob/living/M)
 	..()
@@ -533,7 +533,7 @@
 	reagent_state = LIQUID
 	color = "#664300" // rgb: 102, 67, 0
 	taste_message = "the number fourty two"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/consumable/gargle_blaster/on_general_digest(mob/living/M)
 	..()
@@ -559,7 +559,7 @@
 	reagent_state = LIQUID
 	color = "#2e2e61" // rgb: 46, 46, 97
 	taste_message = "brain damageeeEEeee"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/consumable/neurotoxin/on_general_digest(mob/living/M)
 	..()
@@ -587,7 +587,7 @@
 	color = "#664300" // rgb: 102, 67, 0
 	custom_metabolism = FOOD_METABOLISM * 0.5
 	taste_message = "peeeeeeace"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/consumable/hippies_delight/on_general_digest(mob/living/M)
 	..()
@@ -656,7 +656,7 @@
 	var/blur_start = 300	//amount absorbed after which mob starts getting blurred vision
 	var/pass_out = 400	//amount absorbed after which mob starts passing out
 	taste_message = "liquid fire"
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 	flags = list(IS_ORGANIC)
 
 /datum/reagent/consumable/ethanol/on_general_digest(mob/living/M)

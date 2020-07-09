@@ -304,7 +304,7 @@
 	color = "#e700e7" // rgb: 231, 0, 231
 	overdose = REAGENTS_OVERDOSE
 	custom_metabolism = FOOD_METABOLISM * 0.5
-	restrict_species = list(IPC, DIONA)
+	restrict_species = list(IPC, DIONA, BIONIC)
 
 /datum/reagent/consumable/psilocybin/on_general_digest(mob/living/M)
 	..()

@@ -87,7 +87,7 @@
 	exclaim_verb = "roars"
 	colour = "soghun"
 	key = list("o", "ù")
-	allowed_species = list(IPC)
+	allowed_species = list(IPC, BIONIC)
 	syllables = list("ss","ss","ss","ss","skak","seeki","resh","las","esi","kor","sh")
 
 /datum/language/tajaran
@@ -97,7 +97,7 @@
 	ask_verb = "mrowls"
 	exclaim_verb = "yowls"
 	colour = "tajaran"
-	allowed_species = list(IPC)
+	allowed_species = list(IPC, BIONIC)
 	key = list("j", "î")
 	syllables = list("rr","rr","tajr","kir","raj","kii","mir","kra","ahk","nal","vah","khaz","jri","ran","darr", \
 	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r", \
@@ -123,7 +123,7 @@
 	exclaim_verb = "warbles"
 	colour = "skrell"
 	key = list("k", "ë")
-	allowed_species = list(IPC)
+	allowed_species = list(IPC, BIONIC)
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix","*","!")
 
 /datum/language/vox
@@ -144,7 +144,7 @@
 	speech_verb = "creaks and rustles"
 	ask_verb = "creaks"
 	exclaim_verb = "rustles"
-	allowed_species = list(IPC)
+	allowed_species = list(IPC, BIONIC)
 	colour = "soghun"
 	key = list("q", "é")
 	syllables = list("hs","zt","kr","st","sh")
@@ -152,7 +152,7 @@
 /datum/language/diona_space
 	name = "Rootsong"
 	desc = "A language represented by series of high frequency waves, similiar to those of radio waves. Can not be picked up without advanced equipment, but waves do spread in space."
-	allowed_species = list(IPC, DIONA)
+	allowed_species = list(IPC, DIONA, BIONIC)
 	colour = "soghun"
 	key = list("f", "à")
 	signlang_verb = list("emits a series of short beeps", "screeches in boops", "eminates short pings", "projects a series of screeches")
@@ -163,7 +163,7 @@
 	desc = "A bastardized hybrid of informal English and elements of Mandarin Chinese; the common language of the Sol system."
 	colour = "rough"
 	key = list("1")
-	allowed_species = list(IPC, DIONA, SKRELL, UNATHI, TAJARAN, VOX)
+	allowed_species = list(IPC, DIONA, SKRELL, UNATHI, TAJARAN, VOX, BIONIC)
 	syllables = list("tao","shi","tzu","yi","com","be","is","i","op","vi","ed","lec","mo","cle","te","dis","e")
 
 /datum/language/ipc
@@ -175,7 +175,7 @@
 	colour = "ipc"
 	key = list("x", "÷") //only "dpz" left.
 	//need to find a way to resolve possesive macros
-	allowed_species = list(IPC)
+	allowed_species = list(IPC, BIONIC)
 	syllables = list("000", "111", "222", "001", "010", "100", "002", "020", "200", "011", "101", "110", "022", "202", "220", "112", "121", "211", "122", "212", "221", "012", "021", "120", "210", "102", "201")
 
 // Galactic common languages (systemwide accepted standards).
@@ -185,7 +185,7 @@
 	speech_verb = "enunciates"
 	colour = "say_quote"
 	key = list("2")
-	allowed_species = list(IPC, HUMAN, DIONA, SKRELL, UNATHI, TAJARAN, VOX)
+	allowed_species = list(IPC, HUMAN, DIONA, SKRELL, UNATHI, TAJARAN, VOX, BIONIC)
 	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
 					 "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
 					 "magna", "aliqua", "ut", "enim", "ad", "minim", "veniam", "quis", "nostrud",
@@ -201,7 +201,7 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = list("3")
-	allowed_species = list(IPC, HUMAN, DIONA, SKRELL, UNATHI, TAJARAN, VOX)
+	allowed_species = list(IPC, HUMAN, DIONA, SKRELL, UNATHI, TAJARAN, VOX, BIONIC)
 	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
 
 
@@ -223,7 +223,7 @@
 	desc = "Standart language made of gestures. Common language of deaf and muted people."
 	colour = "rough"
 	key = list("4")
-	allowed_species = list(IPC, HUMAN, DIONA, SKRELL, UNATHI, TAJARAN, VOX)
+	allowed_species = list(IPC, HUMAN, DIONA, SKRELL, UNATHI, TAJARAN, VOX, BIONIC)
 	signlang_verb = list("makes signs with hands", "gestures", "waves hands", "gesticulates")
 	flags = SIGNLANG
 
