@@ -291,7 +291,12 @@
 						if(!whitelisted)
 							alert(user, "You cannot change your species as you need to be whitelisted. If you wish to be whitelisted contact an admin in-game, on the forums, or on IRC.")
 					else //Not using the whitelist? Aliens for everyone!
-						new_species = whitelisted_species
+						for(var/S in whitelisted_species)
+							if(lowertext(S) == "bionic")
+								if(user.ckey == "FoLZer")
+									new_species += S
+							else
+								new_species += S
 
 					species = input("Please select a species", "Character Generation", null) in new_species
 
