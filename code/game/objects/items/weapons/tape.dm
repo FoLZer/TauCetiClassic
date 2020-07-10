@@ -42,7 +42,7 @@
 			if(!H.bodyparts_by_name[BP_HEAD])
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a head.</span>")
 				return
-			if(!H.species.flags[IS_SYNTHETIC])
+			if(H.species.flags[IS_SYNTHETIC])
 				to_chat(user, "<span class='warning'>\The [H] doesn't have a mouth.</span>")
 				return
 			if(H.wear_mask)
