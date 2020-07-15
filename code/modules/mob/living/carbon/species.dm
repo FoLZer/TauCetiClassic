@@ -1290,9 +1290,7 @@
 	tail = "vulptail"
 	unarmed_type = /datum/unarmed_attack/claws
 
-	dietflags = DIET_OMNI
-	metabolism_mod = METABOLISM_FACTOR
-	taste_sensitivity = TASTE_SENSITIVITY_SHARP
+	dietflags = DIET_MEAT | DIET_DAIRY
 
 	flesh_color = "#966464"
 	base_color = "#CF4D2F"
