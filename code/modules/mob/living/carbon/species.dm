@@ -1325,9 +1325,6 @@
 															   unless they choose otherwise by selecting the colourblind disability in character creation (darksight = 8 but colourblind).*/
 		)
 
-/datum/species/vulpkanin/call_digest_proc(mob/living/M, datum/reagent/R)
-	return R.on_skrell_digest(M)
-
 /datum/species/vulpkanin/on_gain(mob/living/M)
 	M.verbs += /mob/living/carbon/human/proc/stop_tail_anim
 
