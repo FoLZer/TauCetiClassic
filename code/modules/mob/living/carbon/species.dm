@@ -324,9 +324,11 @@
 
 /datum/species/unathi/on_gain(mob/living/M)
 	M.verbs += /mob/living/carbon/human/proc/air_sample
+	M.verbs += /mob/living/carbon/human/proc/stop_tail_anim
 
 /datum/species/unathi/on_loose(mob/living/M)
 	M.verbs -= /mob/living/carbon/human/proc/air_sample
+	M.verbs -= /mob/living/carbon/human/proc/stop_tail_anim
 
 /datum/species/tajaran
 	name = TAJARAN
@@ -390,6 +392,12 @@
 
 /datum/species/tajaran/call_species_equip_proc(mob/living/carbon/human/H, var/datum/outfit/O)
 	return O.tajaran_equip(H)
+
+/datum/species/tajaran/on_gain(mob/living/M)
+	M.verbs += /mob/living/carbon/human/proc/stop_tail_anim
+
+/datum/species/tajaran/on_loose(mob/living/M)
+	M.verbs -= /mob/living/carbon/human/proc/stop_tail_anim
 
 /datum/species/skrell
 	name = SKRELL
@@ -1320,6 +1328,11 @@
 /datum/species/vulpkanin/call_digest_proc(mob/living/M, datum/reagent/R)
 	return R.on_skrell_digest(M)
 
+/datum/species/vulpkanin/on_gain(mob/living/M)
+	M.verbs += /mob/living/carbon/human/proc/stop_tail_anim
+
+/datum/species/vulpkanin/on_loose(mob/living/M)
+	M.verbs -= /mob/living/carbon/human/proc/stop_tail_anim
 
 
 /datum/species/bionic
