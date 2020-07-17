@@ -12,7 +12,7 @@
 	var/min_symptoms = 2
 	var/max_symptoms = 6
 	var/cooldown_mul = 1
-	var/list/affected_species = list(HUMAN , UNATHI , SKRELL , TAJARAN)
+	var/list/affected_species = list(HUMAN , UNATHI , SKRELL , TAJARAN, VULPKANIN)
 
 /datum/disease2/disease/New()
 	uniqueID = rand(0,10000)

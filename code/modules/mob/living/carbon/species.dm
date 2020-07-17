@@ -1313,6 +1313,7 @@
 	,HAS_SKIN_COLOR = TRUE
 	,HAS_HAIR = TRUE
 	,HAS_HAIR_COLOR = TRUE
+	,NO_MINORCUTS = TRUE
 	)
 
 	has_organ = list(
