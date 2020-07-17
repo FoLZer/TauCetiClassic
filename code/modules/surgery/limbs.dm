@@ -156,7 +156,10 @@
 		var/obj/item/robot_parts/L = tool
 		if(!L.can_attach())
 			return
-		BP = new L.bodypart_type()
+		if(target.species.name==BIONIC)
+			BP = new L.bionic_bodypart_type()
+		else
+			BP = new L.bodypart_type()
 		target.remove_from_mob(tool)
 		qdel(tool)
 

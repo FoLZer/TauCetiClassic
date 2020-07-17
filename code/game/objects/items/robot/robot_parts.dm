@@ -8,6 +8,7 @@
 	var/part = null
 	var/sabotaged = 0 //Emagging limbs can have repercussions when installed as prosthetics.
 	var/bodypart_type
+	var/bionic_bodypart_type
 
 /obj/item/robot_parts/l_arm
 	name = "robot left arm"
@@ -15,6 +16,7 @@
 	icon_state = "l_arm"
 	part = BP_L_ARM
 	bodypart_type = /obj/item/organ/external/l_arm/robot
+	bionic_bodypart_type = /obj/item/organ/external/l_arm/robot/bionic
 
 /obj/item/robot_parts/r_arm
 	name = "robot right arm"
@@ -22,6 +24,7 @@
 	icon_state = "r_arm"
 	part = BP_R_ARM
 	bodypart_type = /obj/item/organ/external/r_arm/robot
+	bionic_bodypart_type = /obj/item/organ/external/r_arm/robot/bionic
 
 /obj/item/robot_parts/l_leg
 	name = "robot left leg"
@@ -29,6 +32,7 @@
 	icon_state = "l_leg"
 	part = BP_L_LEG
 	bodypart_type = /obj/item/organ/external/l_leg/robot
+	bionic_bodypart_type = /obj/item/organ/external/l_leg/robot/bionic
 
 /obj/item/robot_parts/r_leg
 	name = "robot right leg"
@@ -36,6 +40,7 @@
 	icon_state = "r_leg"
 	part = BP_R_LEG
 	bodypart_type = /obj/item/organ/external/r_leg/robot
+	bionic_bodypart_type = /obj/item/organ/external/r_leg/robot/bionic
 
 /obj/item/robot_parts/chest
 	name = "robot torso"
