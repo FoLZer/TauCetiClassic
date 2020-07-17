@@ -1334,6 +1334,8 @@
 /datum/species/vulpkanin/on_loose(mob/living/M)
 	M.verbs -= /mob/living/carbon/human/proc/stop_tail_anim
 
+/datum/species/vulpkanin/call_digest_proc(mob/living/M, datum/reagent/R)
+	return R.on_vulpkanin_digest(M)
 
 /datum/species/bionic
 	name = BIONIC
