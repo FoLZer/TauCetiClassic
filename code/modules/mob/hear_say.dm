@@ -65,6 +65,8 @@
 					pronoun = "it"
 			to_chat(src, "<span class='name'>[speaker_name]</span>[alt_name] talks but you cannot hear [pronoun].")
 	else
+		if(isliving(src))
+			message = highlight_traitor_codewords(message, src.mind)
 		if(language)
 			to_chat(src, "[track] <span class='game say'><span class='name'>[speaker_name]</span>[alt_name] [language.format_message(message, verb)]</span>")
 		else
@@ -180,6 +182,8 @@
 			speaker = S.eyeobj
 		track = "<a href='byond://?src=\ref[src];track=\ref[speaker]'>(F)</a> [speaker_name]"
 
+	if(isliving(src))
+		message = highlight_traitor_codewords(message, src.mind)
 	var/formatted
 	if(language)
 		formatted = language.format_message_radio(message, verb)
@@ -222,10 +226,10 @@
 		var/list/messages = splittext(message, " ")
 		var/R = rand(1, messages.len)
 		var/heardword = messages[R]
-		if(copytext(heardword,1, 1) in punctuation)
+		if(heardword[1] in punctuation)
 			heardword = copytext(heardword,2)
 		if(copytext(heardword,-1) in punctuation)
-			heardword = copytext(heardword,1,lentext(heardword))
+			heardword = copytext(heardword,1,-1)
 		heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
 
 	else

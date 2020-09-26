@@ -5,7 +5,7 @@
 	var/width = 0
 	var/height = 0
 	var/atom/ref = null
-	var/theme = CSS_THEME_DARK
+	var/theme = CSS_THEME_DARK // or CSS_THEME_LIGHT
 	var/window_options = "focus=0;can_close=1;can_minimize=1;can_maximize=0;can_resize=1;titlebar=1;" // window option is set using window_id
 	var/stylesheets[0]
 	var/scripts[0]
@@ -57,7 +57,7 @@
 	else
 		var/asset_name = "[name].css"
 		stylesheets[asset_name] = file
-		if(!SSasset.cache[asset_name])
+		if(!SSassets.cache[asset_name])
 			register_asset(asset_name, file)
 
 /datum/browser/proc/add_script(name, file)
@@ -86,11 +86,11 @@
 	if(title_image)
 		title_attributes = "class='uiTitle icon' style='background-image: url([title_image]);'"
 
-	return {"<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	return {"<!DOCTYPE html>
 <html>
-	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		[head_content]
 	</head>
 	<body scroll=auto class='[theme]'>
@@ -103,9 +103,6 @@
 	return {"
 			</div>
 		</div>
-		<script>
-			document.body.innerHTML = document.body.innerHTML.replace(/¶/g, "&#1103;");
-		</script>
 	</body>
 </html>"}
 
@@ -122,9 +119,9 @@
 		window_size = "size=[width]x[height];"
 	send_asset(user, "error_handler.js")
 	if(stylesheets.len)
-		send_asset_list(user, stylesheets, verify=FALSE)
+		send_asset_list(user, stylesheets)
 	if(scripts.len)
-		send_asset_list(user, scripts, verify=FALSE)
+		send_asset_list(user, scripts)
 	user << browse(get_content(), "window=[window_id];[window_size][window_options]")
 	if(use_onclose)
 		onclose(user, window_id, ref)
@@ -191,7 +188,7 @@
 
 /datum/browser/modal/proc/wait()
 	while (opentime && selectedbutton <= 0 && (!timeout || opentime+timeout > world.time))
-		stoplag()
+		stoplag(1)
 
 
 
