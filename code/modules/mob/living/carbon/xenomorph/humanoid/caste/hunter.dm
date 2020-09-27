@@ -16,6 +16,7 @@
 	if(name == "alien hunter")
 		name = text("alien hunter ([rand(1, 1000)])")
 	real_name = name
+	verbs.Add(/mob/living/carbon/xenomorph/humanoid/proc/resin,/mob/living/carbon/xenomorph/humanoid/proc/corrosive_acid)
 	. = ..()
 
 /mob/living/carbon/xenomorph/humanoid/hunter/handle_environment()
