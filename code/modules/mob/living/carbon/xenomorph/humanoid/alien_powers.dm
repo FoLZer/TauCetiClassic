@@ -82,11 +82,11 @@ Doesn't work on other aliens/AI.*/
 
 
 /mob/living/carbon/xenomorph/humanoid/proc/corrosive_acid(O in oview(1)) //If they right click to corrode, an error will flash if its an invalid target./N
-	set name = "Corrossive Acid (200)"
+	set name = "Corrossive Acid (70)"
 	set desc = "Drench an object in acid, destroying it over time."
 	set category = "Alien"
 
-	if(powerc(200))
+	if(powerc(70))
 		if(O in oview(1))
 			// OBJ CHECK
 			if(isobj(O))
@@ -108,7 +108,7 @@ Doesn't work on other aliens/AI.*/
 			else// Not a type we can acid.
 				return
 
-			adjustToxLoss(-200)
+			adjustToxLoss(-70)
 			new /obj/effect/alien/acid(get_turf(O), O)
 			visible_message("<span class='danger'>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</span>")
 		else
